@@ -1,3 +1,6 @@
 *.cf
+*.cfe
 .build/ib/
 .build/logs/
+.build/*.bac
+extensions/
