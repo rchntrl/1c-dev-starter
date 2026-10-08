@@ -1,6 +1,13 @@
 *.cf
 *.cfe
-.build/ib/
-.build/logs/
-.build/*.bac
-extensions/
+*.epf
+*.erf
+.build/*
+!.build/README.md
+!.build/build-*.bat
+conf/*
+!conf/README.md
+extensions/*
+!extensions/README.md
+external/*
+!external/README.md
