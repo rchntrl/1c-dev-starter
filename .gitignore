@@ -5,6 +5,7 @@
 .build/*
 !.build/README.md
 !.build/build-*.bat
+!.build/build-*.ps1
 conf/*
 !conf/README.md
 extensions/*

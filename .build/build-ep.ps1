@@ -1,0 +1,79 @@
+param(
+    [Parameter(Position = 0)]
+    [string]$Processing = '',
+
+    [Parameter(Position = 1)]
+    [string]$Platform = '8.3.24.1691'
+)
+
+$ErrorActionPreference = 'Stop'
+$root = Split-Path -Parent $PSScriptRoot
+$designer = "C:\Program Files (x86)\1cv8\$Platform\bin\1cv8.exe"
+$infobase = Join-Path $PSScriptRoot 'ib'
+$source = Join-Path (Join-Path $root 'external') "$Processing.xml"
+$logs = Join-Path $PSScriptRoot 'logs'
+$buildDate = Get-Date -Format 'yyyy-MM-dd'
+$output = Join-Path $root "${Processing}_${buildDate}.epf"
+$buildLog = Join-Path $logs 'build-external.log'
+$createLog = Join-Path $logs 'create.log'
+
+if ([string]::IsNullOrEmpty($Processing)) {
+    Write-Host '[ERROR] External processing name is required.'
+    Write-Host '        Usage: build-ep.ps1 <external-processing-name> [platform-version]'
+    exit 1
+}
+
+if (-not (Test-Path -LiteralPath $designer -PathType Leaf)) {
+    Write-Host "[ERROR] Platform not found: `"$designer`""
+    $platformRoot = 'C:\Program Files (x86)\1cv8'
+    if (Test-Path -LiteralPath $platformRoot -PathType Container) {
+        Write-Host 'Installed versions:'
+        Get-ChildItem -LiteralPath $platformRoot -Directory |
+            Where-Object Name -Match '^8\.' |
+            ForEach-Object { Write-Host $_.Name }
+    }
+    exit 1
+}
+if (-not (Test-Path -LiteralPath $source -PathType Leaf)) {
+    Write-Host "[ERROR] Source XML not found: $source"
+    exit 1
+}
+
+New-Item -ItemType Directory -Path $logs -Force | Out-Null
+
+if (-not (Test-Path -LiteralPath (Join-Path $infobase '1Cv8.1CD') -PathType Leaf)) {
+    Write-Host "[1/2] Creating empty infobase: $infobase"
+    New-Item -ItemType Directory -Path $infobase -Force | Out-Null
+    & $designer CREATEINFOBASE "File=$infobase" /DisableStartupDialogs /DisableStartupMessages /Out $createLog
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "[ERROR] CREATEINFOBASE failed, see $createLog"
+        if (Test-Path -LiteralPath $createLog) {
+            Get-Content -LiteralPath $createLog
+        }
+        exit 1
+    }
+}
+else {
+    Write-Host "[1/2] Reusing existing infobase: $infobase"
+}
+
+Write-Host "[2/2] Building $output from $source"
+& $designer DESIGNER /F $infobase /DisableStartupDialogs /DisableStartupMessages /LoadExternalDataProcessorOrReportFromFiles $source $output /Out $buildLog
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "[ERROR] LoadExternalDataProcessorOrReportFromFiles failed, see $buildLog"
+    if (Test-Path -LiteralPath $buildLog) {
+        Get-Content -LiteralPath $buildLog
+    }
+    exit 1
+}
+if (-not (Test-Path -LiteralPath $output -PathType Leaf)) {
+    Write-Host "[ERROR] External processing package was not created: $output"
+    if (Test-Path -LiteralPath $buildLog) {
+        Get-Content -LiteralPath $buildLog
+    }
+    exit 1
+}
+
+$artifact = Get-Item -LiteralPath $output
+Write-Host "`n[OK] $output"
+Write-Host "     $($artifact.Length) bytes, $($artifact.LastWriteTime)"

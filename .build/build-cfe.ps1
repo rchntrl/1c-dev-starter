@@ -1,0 +1,104 @@
+param(
+    [string]$Extension = 'GS',
+    [string]$Platform = '8.3.24.1691'
+)
+
+$ErrorActionPreference = 'Stop'
+$root = Split-Path -Parent $PSScriptRoot
+$designer = "C:\Program Files (x86)\1cv8\$Platform\bin\1cv8.exe"
+$infobase = Join-Path $PSScriptRoot 'ib'
+$source = Join-Path (Join-Path $root 'extensions') $Extension
+$logs = Join-Path $PSScriptRoot 'logs'
+$dumpInfo = Join-Path $source 'ConfigDumpInfo.xml'
+$dumpInfoBackup = Join-Path $PSScriptRoot 'ConfigDumpInfo.xml.bak'
+$buildDate = Get-Date -Format 'yyyy-MM-dd'
+$output = Join-Path $root "${Extension}_${buildDate}.cfe"
+$loadConsoleLog = Join-Path $logs 'load-extension-console.log'
+
+if (-not (Test-Path -LiteralPath $designer -PathType Leaf)) {
+    Write-Host "[ERROR] Platform not found: `"$designer`""
+    $platformRoot = 'C:\Program Files (x86)\1cv8'
+    if (Test-Path -LiteralPath $platformRoot -PathType Container) {
+        Write-Host 'Installed versions:'
+        Get-ChildItem -LiteralPath $platformRoot -Directory |
+            Where-Object Name -Match '^8\.' |
+            ForEach-Object { Write-Host $_.Name }
+    }
+    exit 1
+}
+if (-not (Test-Path -LiteralPath (Join-Path $source 'Configuration.xml') -PathType Leaf)) {
+    Write-Host "[ERROR] Source dump not found: $(Join-Path $source 'Configuration.xml')"
+    exit 1
+}
+
+New-Item -ItemType Directory -Path $logs -Force | Out-Null
+
+if (-not (Test-Path -LiteralPath (Join-Path $infobase '1Cv8.1CD') -PathType Leaf)) {
+    Write-Host "[1/3] Creating empty infobase: $infobase"
+    New-Item -ItemType Directory -Path $infobase -Force | Out-Null
+    & $designer CREATEINFOBASE "File=$infobase" /DisableStartupDialogs /DisableStartupMessages /Out (Join-Path $logs 'create.log')
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "[ERROR] CREATEINFOBASE failed, see $(Join-Path $logs 'create.log')"
+        if (Test-Path -LiteralPath (Join-Path $logs 'create.log')) {
+            Get-Content -LiteralPath (Join-Path $logs 'create.log')
+        }
+        exit 1
+    }
+}
+else {
+    Write-Host "[1/3] Reusing existing infobase: $infobase"
+}
+
+if (Test-Path -LiteralPath $dumpInfo -PathType Leaf) {
+    Move-Item -LiteralPath $dumpInfo -Destination $dumpInfoBackup -Force
+}
+
+Write-Host "[2/3] Loading configuration from $source ... (may take ~10 min)"
+$previousErrorActionPreference = $ErrorActionPreference
+Set-Content -LiteralPath $loadConsoleLog -Value '' -NoNewline
+try {
+    $ErrorActionPreference = 'Continue'
+    & $designer DESIGNER /F $infobase /DisableStartupDialogs /DisableStartupMessages /LoadConfigFromFiles $source -Extension $Extension /UpdateDBCfg /Out (Join-Path $logs 'load-extension.log') 2>&1 |
+        Tee-Object -FilePath $loadConsoleLog
+    $loadExitCode = $LASTEXITCODE
+}
+finally {
+    $ErrorActionPreference = $previousErrorActionPreference
+    if (Test-Path -LiteralPath $dumpInfoBackup -PathType Leaf) {
+        Move-Item -LiteralPath $dumpInfoBackup -Destination $dumpInfo -Force
+    }
+}
+
+if ($loadExitCode -ne 0) {
+    Write-Host "[ERROR] LoadConfigFromFiles failed (rc=$loadExitCode), see $(Join-Path $logs 'load-extension.log')"
+    if ((Test-Path -LiteralPath (Join-Path $logs 'load-extension.log')) -and
+        (Get-Item -LiteralPath (Join-Path $logs 'load-extension.log')).Length -gt 3) {
+        Get-Content -LiteralPath (Join-Path $logs 'load-extension.log')
+    }
+    Write-Host "Designer console output: $loadConsoleLog"
+    if (Test-Path -LiteralPath $loadConsoleLog -PathType Leaf) {
+        Get-Content -LiteralPath $loadConsoleLog
+    }
+    exit $loadExitCode
+}
+
+Write-Host "[3/3] Dumping $output"
+& $designer DESIGNER /F $infobase /DisableStartupDialogs /DisableStartupMessages /DumpCfg $output -Extension $Extension /Out (Join-Path $logs 'dump-extension.log')
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "[ERROR] DumpCfg failed, see $(Join-Path $logs 'dump-extension.log')"
+    if (Test-Path -LiteralPath (Join-Path $logs 'dump-extension.log')) {
+        Get-Content -LiteralPath (Join-Path $logs 'dump-extension.log')
+    }
+    exit 1
+}
+if (-not (Test-Path -LiteralPath $output -PathType Leaf)) {
+    Write-Host "[ERROR] Extension package was not created: $output"
+    if (Test-Path -LiteralPath (Join-Path $logs 'dump-extension.log')) {
+        Get-Content -LiteralPath (Join-Path $logs 'dump-extension.log')
+    }
+    exit 1
+}
+
+$artifact = Get-Item -LiteralPath $output
+Write-Host "`n[OK] $output"
+Write-Host "     $($artifact.Length) bytes, $($artifact.LastWriteTime)"

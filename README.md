@@ -14,8 +14,42 @@
 
 ## Сценарии сборки
 
-- `.build/build-cf.bat` — сборка `.cf` из XML-выгрузки в `conf`;
-- `.build/build-cfe.bat` — сборка расширения из `extensions`;
-- `.build/build-ep.bat` — сборка внешней обработки из XML-выгрузки в `external`.
+- `.build/build-cf.ps1` / `.build/build-cf.bat` — сборка `.cf` из XML-выгрузки в `conf`;
+- `.build/build-cfe.ps1` / `.build/build-cfe.bat` — сборка расширения из `extensions`;
+- `.build/build-ep.ps1` / `.build/build-ep.bat` — сборка внешней обработки из XML-выгрузки в `external`.
+
+### Как читать команды сборки
+
+Оба варианта запускаются из корня репозитория. Для PowerShell используйте
+`.ps1`, для командной строки Windows — `.bat`. Аргументы указываются в одном
+порядке: имя исходного артефакта, затем (необязательно) версия платформы.
+
+```powershell
+.\.build\build-ep.ps1 INTEGRATION_TOOLS_RMv2.0
+.\.build\build-ep.bat INTEGRATION_TOOLS_RMv2.0
+```
+
+Здесь:
+
+- `build-ep.ps1` и `build-ep.bat` — сценарии сборки внешней обработки;
+- `INTEGRATION_TOOLS_RMv2.0` — имя исходного XML-файла без расширения `.xml`;
+- сценарий ищет файл `external\INTEGRATION_TOOLS_RMv2.0.xml`;
+- финальный артефакт сохраняется в корне проекта как `INTEGRATION_TOOLS_RMv2.0_YYYY-MM-DD.epf`.
+
+Для конфигурации и расширения также можно выбрать любой вариант:
+
+```powershell
+.\.build\build-cf.ps1 1Cv8 8.3.24.1691
+.\.build\build-cf.bat 1Cv8 8.3.24.1691
+.\.build\build-cfe.ps1 GS 8.3.24.1691
+.\.build\build-cfe.bat GS 8.3.24.1691
+```
+
+Имена и версии можно передать аргументами; версии по умолчанию указаны в
+сценариях.
+
+Если политика выполнения блокирует запуск `.ps1`, используйте отдельный процесс,
+например: `powershell -NoProfile -ExecutionPolicy Bypass -File .build\build-ep.ps1 INTEGRATION_TOOLS_RMv2.0`.
+Это не меняет системные настройки; подробности приведены в [README каталога сборки](.build/README.md).
 
 Подробности о назначении локальных каталогов находятся в README внутри них.
