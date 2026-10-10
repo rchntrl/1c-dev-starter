@@ -1,9 +1,19 @@
 param(
-    [string]$Extension = 'GS',
-    [string]$Platform = '8.3.24.1691'
+    [string]$Extension,
+    [string]$Platform
 )
 
 $ErrorActionPreference = 'Stop'
+$parametersFile = Join-Path $PSScriptRoot 'parameters.yml'
+. (Join-Path $PSScriptRoot 'build-auth.ps1')
+$buildParameters = Read-BuildParameters -Path $parametersFile
+if ([string]::IsNullOrWhiteSpace($Extension)) {
+    $Extension = if ($buildParameters['extension']) { $buildParameters['extension'] } else { 'GS' }
+}
+if ([string]::IsNullOrWhiteSpace($Platform)) {
+    $Platform = if ($buildParameters['platform']) { $buildParameters['platform'] } else { '8.3.24.1691' }
+}
+$designerAuthenticationArguments = Get-DesignerAuthenticationArguments -Parameters $buildParameters
 $root = Split-Path -Parent $PSScriptRoot
 $designer = "C:\Program Files (x86)\1cv8\$Platform\bin\1cv8.exe"
 $infobase = Join-Path $PSScriptRoot 'ib'
@@ -14,7 +24,6 @@ $dumpInfoBackup = Join-Path $PSScriptRoot 'ConfigDumpInfo.xml.bak'
 $buildDate = Get-Date -Format 'yyyy-MM-dd'
 $output = Join-Path $root "${Extension}_${buildDate}.cfe"
 $loadConsoleLog = Join-Path $logs 'load-extension-console.log'
-
 if (-not (Test-Path -LiteralPath $designer -PathType Leaf)) {
     Write-Host "[ERROR] Platform not found: `"$designer`""
     $platformRoot = 'C:\Program Files (x86)\1cv8'
@@ -58,7 +67,7 @@ $previousErrorActionPreference = $ErrorActionPreference
 Set-Content -LiteralPath $loadConsoleLog -Value '' -NoNewline
 try {
     $ErrorActionPreference = 'Continue'
-    & $designer DESIGNER /F $infobase /DisableStartupDialogs /DisableStartupMessages /LoadConfigFromFiles $source -Extension $Extension /UpdateDBCfg /Out (Join-Path $logs 'load-extension.log') 2>&1 |
+    & $designer DESIGNER /F $infobase @designerAuthenticationArguments /DisableStartupDialogs /DisableStartupMessages /LoadConfigFromFiles $source -Extension $Extension /UpdateDBCfg /Out (Join-Path $logs 'load-extension.log') 2>&1 |
         Tee-Object -FilePath $loadConsoleLog
     $loadExitCode = $LASTEXITCODE
 }
@@ -83,7 +92,7 @@ if ($loadExitCode -ne 0) {
 }
 
 Write-Host "[3/3] Dumping $output"
-& $designer DESIGNER /F $infobase /DisableStartupDialogs /DisableStartupMessages /DumpCfg $output -Extension $Extension /Out (Join-Path $logs 'dump-extension.log')
+& $designer DESIGNER /F $infobase @designerAuthenticationArguments /DisableStartupDialogs /DisableStartupMessages /DumpCfg $output -Extension $Extension /Out (Join-Path $logs 'dump-extension.log')
 if ($LASTEXITCODE -ne 0) {
     Write-Host "[ERROR] DumpCfg failed, see $(Join-Path $logs 'dump-extension.log')"
     if (Test-Path -LiteralPath (Join-Path $logs 'dump-extension.log')) {

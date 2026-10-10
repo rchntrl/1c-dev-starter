@@ -1,9 +1,19 @@
 param(
-    [string]$Configuration = '1Cv8',
-    [string]$Platform = '8.3.24.1691'
+    [string]$Configuration,
+    [string]$Platform
 )
 
 $ErrorActionPreference = 'Stop'
+$parametersFile = Join-Path $PSScriptRoot 'parameters.yml'
+. (Join-Path $PSScriptRoot 'build-auth.ps1')
+$buildParameters = Read-BuildParameters -Path $parametersFile
+if ([string]::IsNullOrWhiteSpace($Configuration)) {
+    $Configuration = if ($buildParameters['configuration']) { $buildParameters['configuration'] } else { '1Cv8' }
+}
+if ([string]::IsNullOrWhiteSpace($Platform)) {
+    $Platform = if ($buildParameters['platform']) { $buildParameters['platform'] } else { '8.3.24.1691' }
+}
+$designerAuthenticationArguments = Get-DesignerAuthenticationArguments -Parameters $buildParameters
 $root = Split-Path -Parent $PSScriptRoot
 $designer = "C:\Program Files (x86)\1cv8\$Platform\bin\1cv8.exe"
 $infobase = Join-Path $PSScriptRoot 'ib'
@@ -14,7 +24,6 @@ $dumpInfoBackup = Join-Path $PSScriptRoot 'ConfigDumpInfo.xml.bak'
 $output = Join-Path $root "$Configuration.cf"
 $loadConsoleLog = Join-Path $logs 'load-console.log'
 $dumpConsoleLog = Join-Path $logs 'dump-console.log'
-
 if (-not (Test-Path -LiteralPath $designer -PathType Leaf)) {
     Write-Host "[ERROR] Platform not found: `"$designer`""
     $platformRoot = 'C:\Program Files (x86)\1cv8'
@@ -58,7 +67,7 @@ $previousErrorActionPreference = $ErrorActionPreference
 Set-Content -LiteralPath $loadConsoleLog -Value '' -NoNewline
 try {
     $ErrorActionPreference = 'Continue'
-    & $designer DESIGNER /F $infobase /DisableStartupDialogs /DisableStartupMessages /LoadConfigFromFiles $source /Out (Join-Path $logs 'load.log') 2>&1 |
+    & $designer DESIGNER /F $infobase @designerAuthenticationArguments /DisableStartupDialogs /DisableStartupMessages /LoadConfigFromFiles $source /Out (Join-Path $logs 'load.log') 2>&1 |
         Tee-Object -FilePath $loadConsoleLog
     $loadExitCode = $LASTEXITCODE
 }
@@ -87,7 +96,7 @@ $previousErrorActionPreference = $ErrorActionPreference
 Set-Content -LiteralPath $dumpConsoleLog -Value '' -NoNewline
 try {
     $ErrorActionPreference = 'Continue'
-    & $designer DESIGNER /F $infobase /DisableStartupDialogs /DisableStartupMessages /DumpCfg $output /Out (Join-Path $logs 'dump.log') 2>&1 |
+    & $designer DESIGNER /F $infobase @designerAuthenticationArguments /DisableStartupDialogs /DisableStartupMessages /DumpCfg $output /Out (Join-Path $logs 'dump.log') 2>&1 |
         Tee-Object -FilePath $dumpConsoleLog
     $dumpExitCode = $LASTEXITCODE
 }
