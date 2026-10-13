@@ -14,3 +14,4 @@ extensions/*
 !extensions/README.md
 external/*
 !external/README.md
+!external/INTEGRATION_TOOLS_RMv2.0*

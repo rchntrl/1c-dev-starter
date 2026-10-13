@@ -21,7 +21,8 @@ $source = Join-Path $root 'conf'
 $logs = Join-Path $PSScriptRoot 'logs'
 $dumpInfo = Join-Path $source 'ConfigDumpInfo.xml'
 $dumpInfoBackup = Join-Path $PSScriptRoot 'ConfigDumpInfo.xml.bak'
-$output = Join-Path $root "$Configuration.cf"
+$buildDate = Get-Date -Format 'yyyy-MM-dd'
+$output = Join-Path $root "${Configuration}_${buildDate}.cf"
 $loadConsoleLog = Join-Path $logs 'load-console.log'
 $dumpConsoleLog = Join-Path $logs 'dump-console.log'
 if (-not (Test-Path -LiteralPath $designer -PathType Leaf)) {
