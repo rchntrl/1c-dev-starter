@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.10">
+	<AutoSaveDataInSettings>Use</AutoSaveDataInSettings>
+	<SaveDataInSettings>UseList</SaveDataInSettings>
+	<AutoCommandBar name="ФормаКоманднаяПанель" id="-1">
+		<ChildItems>
+			<ButtonGroup name="ФормаГруппа1" id="132">
+				<CommandSource>Item.Визуализация</CommandSource>
+				<Representation>Compact</Representation>
+				<ExtendedTooltip name="ФормаГруппа1РасширеннаяПодсказка" id="133"/>
+				<ChildItems>
+					<Button name="ФормаСвернутьВсеГруппы" id="128">
+						<Type>CommandBarButton</Type>
+						<Representation>Picture</Representation>
+						<CommandName>Form.Item.Визуализация.StandardCommand.CollapseAllGroups</CommandName>
+						<LocationInCommandBar>InCommandBar</LocationInCommandBar>
+						<ExtendedTooltip name="ФормаСвернутьВсеГруппыРасширеннаяПодсказка" id="129"/>
+					</Button>
+					<Button name="ФормаРазвернутьВсеГруппы" id="130">
+						<Type>CommandBarButton</Type>
+						<Representation>Picture</Representation>
+						<CommandName>Form.Item.Визуализация.StandardCommand.ExpandAllGroups</CommandName>
+						<LocationInCommandBar>InCommandBar</LocationInCommandBar>
+						<ExtendedTooltip name="ФормаРазвернутьВсеГруппыРасширеннаяПодсказка" id="131"/>
+					</Button>
+				</ChildItems>
+			</ButtonGroup>
+			<Button name="ФормаСохранить" id="126">
+				<Type>CommandBarButton</Type>
+				<Representation>Picture</Representation>
+				<CommandName>Form.Item.Визуализация.StandardCommand.Save</CommandName>
+				<LocationInCommandBar>InCommandBar</LocationInCommandBar>
+				<ExtendedTooltip name="ФормаСохранитьРасширеннаяПодсказка" id="127"/>
+			</Button>
+		</ChildItems>
+	</AutoCommandBar>
+	<Events>
+		<Event name="OnOpen">ПриОткрытии</Event>
+		<Event name="OnCreateAtServer">ПриСозданииНаСервере</Event>
+	</Events>
+	<ChildItems>
+		<UsualGroup name="Группа3" id="136">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>JSON</v8:content>
+				</v8:item>
+			</Title>
+			<Group>AlwaysHorizontal</Group>
+			<Behavior>PopUp</Behavior>
+			<ExtendedTooltip name="Группа3РасширеннаяПодсказка" id="137"/>
+			<ChildItems>
+				<InputField name="JSONRequest" id="138">
+					<DataPath>Объект.JSONRequest</DataPath>
+					<TextColor>web:Green</TextColor>
+					<ContextMenu name="JSONRequestКонтекстноеМеню" id="139"/>
+					<ExtendedTooltip name="JSONRequestРасширеннаяПодсказка" id="140"/>
+				</InputField>
+				<InputField name="JSONResponse" id="141">
+					<DataPath>Объект.JSONResponse</DataPath>
+					<TextColor>web:RoyalBlue</TextColor>
+					<ContextMenu name="JSONResponseКонтекстноеМеню" id="142"/>
+					<ExtendedTooltip name="JSONResponseРасширеннаяПодсказка" id="143"/>
+				</InputField>
+			</ChildItems>
+		</UsualGroup>
+		<Pages name="ГруппаСтраницы" id="1">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Группа страницы</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Группа страницы</v8:content>
+				</v8:item>
+			</ToolTip>
+			<ExtendedTooltip name="ГруппаСтраницыРасширеннаяПодсказка" id="2"/>
+			<ChildItems>
+				<Page name="ГруппаУправление" id="3">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Управление</v8:content>
+						</v8:item>
+					</Title>
+					<ToolTip>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Группа управление</v8:content>
+						</v8:item>
+					</ToolTip>
+					<Picture>
+						<xr:Ref>CommonPicture.РазделАдминистрирование48</xr:Ref>
+						<xr:LoadTransparent>true</xr:LoadTransparent>
+					</Picture>
+					<ExtendedTooltip name="ГруппаУправлениеРасширеннаяПодсказка" id="4"/>
+					<ChildItems>
+						<UsualGroup name="ГруппаНастройки" id="134">
+							<Title>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>Настройки</v8:content>
+								</v8:item>
+							</Title>
+							<ToolTip>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>Група настройки</v8:content>
+								</v8:item>
+							</ToolTip>
+							<Group>Vertical</Group>
+							<Representation>None</Representation>
+							<ExtendedTooltip name="ГруппаНастройкиРасширеннаяПодсказка" id="135"/>
+							<ChildItems>
+								<UsualGroup name="ГруппаПереключатели" id="67">
+									<Title>
+										<v8:item>
+											<v8:lang>ru</v8:lang>
+											<v8:content>Группа переключатели</v8:content>
+										</v8:item>
+									</Title>
+									<ToolTip>
+										<v8:item>
+											<v8:lang>ru</v8:lang>
+											<v8:content>Группа переключатели</v8:content>
+										</v8:item>
+									</ToolTip>
+									<Group>AlwaysHorizontal</Group>
+									<Representation>None</Representation>
+									<ShowTitle>false</ShowTitle>
+									<ExtendedTooltip name="ГруппаПереключателиРасширеннаяПодсказка" id="68"/>
+									<ChildItems>
+										<UsualGroup name="Группа1" id="110">
+											<Group>Vertical</Group>
+											<Representation>StrongSeparation</Representation>
+											<ShowTitle>false</ShowTitle>
+											<ExtendedTooltip name="Группа1РасширеннаяПодсказка" id="111"/>
+											<ChildItems>
+												<CheckBoxField name="ОткрыватьЛоги" id="58">
+													<DataPath>Объект.ОткрыватьЛоги</DataPath>
+													<CheckBoxType>Switcher</CheckBoxType>
+													<ContextMenu name="ОткрыватьЛогиКонтекстноеМеню" id="59"/>
+													<ExtendedTooltip name="ОткрыватьЛогиРасширеннаяПодсказка" id="60"/>
+												</CheckBoxField>
+												<CheckBoxField name="ОстановитьПриОшибке" id="27">
+													<DataPath>Объект.ОстановитьПриОшибке</DataPath>
+													<CheckBoxType>Switcher</CheckBoxType>
+													<ContextMenu name="ОстановитьПриОшибкеКонтекстноеМеню" id="28"/>
+													<ExtendedTooltip name="ОстановитьПриОшибкеРасширеннаяПодсказка" id="29"/>
+												</CheckBoxField>
+											</ChildItems>
+										</UsualGroup>
+										<UsualGroup name="Группа2" id="115">
+											<Group>Vertical</Group>
+											<Representation>StrongSeparation</Representation>
+											<ShowTitle>false</ShowTitle>
+											<ExtendedTooltip name="Группа2РасширеннаяПодсказка" id="116"/>
+											<ChildItems>
+												<Button name="ОткрытьЛоги" id="151">
+													<Type>Hyperlink</Type>
+													<CommandName>Form.Command.ОткрытьЛоги</CommandName>
+													<ExtendedTooltip name="ОткрытьЛогиРасширеннаяПодсказка" id="152"/>
+												</Button>
+												<CheckBoxField name="ТестовыйРежим" id="24">
+													<DataPath>Объект.ТестовыйРежим</DataPath>
+													<CheckBoxType>Switcher</CheckBoxType>
+													<ContextMenu name="ТестовыйРежимКонтекстноеМеню" id="25"/>
+													<ExtendedTooltip name="ТестовыйРежимРасширеннаяПодсказка" id="26"/>
+												</CheckBoxField>
+											</ChildItems>
+										</UsualGroup>
+									</ChildItems>
+								</UsualGroup>
+							</ChildItems>
+						</UsualGroup>
+					</ChildItems>
+				</Page>
+				<Page name="ГруппаВизуализация" id="5">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Доска</v8:content>
+						</v8:item>
+					</Title>
+					<ToolTip>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Группа визуализация</v8:content>
+						</v8:item>
+					</ToolTip>
+					<ExtendedTooltip name="ГруппаВизуализацияРасширеннаяПодсказка" id="6"/>
+					<ChildItems>
+						<RadioButtonField name="ВыполнитьОтчет" id="32">
+							<DataPath>ВыполнитьОтчет</DataPath>
+							<SkipOnInput>true</SkipOnInput>
+							<TitleLocation>None</TitleLocation>
+							<RadioButtonType>Tumbler</RadioButtonType>
+							<ChoiceList>
+								<xr:Item>
+									<xr:Presentation/>
+									<xr:CheckState>0</xr:CheckState>
+									<xr:Value xsi:type="FormChoiceListDesTimeValue">
+										<Presentation/>
+										<Value xsi:type="xs:string"/>
+									</xr:Value>
+								</xr:Item>
+							</ChoiceList>
+							<Font bold="true" kind="AutoFont"/>
+							<ContextMenu name="ВыполнитьОтчетКонтекстноеМеню" id="33"/>
+							<ExtendedTooltip name="ВыполнитьОтчетРасширеннаяПодсказка" id="34"/>
+							<Events>
+								<Event name="OnChange">ОтчетПриИзменении</Event>
+							</Events>
+						</RadioButtonField>
+						<SpreadSheetDocumentField name="Визуализация" id="13">
+							<DataPath>Объект.Визуализация</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<ContextMenu name="ВизуализацияКонтекстноеМеню" id="14"/>
+							<ExtendedTooltip name="ВизуализацияРасширеннаяПодсказка" id="15"/>
+							<Events>
+								<Event name="DetailProcessing">ВизуализацияОбработкаРасшифровки</Event>
+							</Events>
+						</SpreadSheetDocumentField>
+					</ChildItems>
+				</Page>
+				<Page name="ГруппаНавигацияПоДеталям" id="187">
+					<Visible>false</Visible>
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Детали</v8:content>
+						</v8:item>
+					</Title>
+					<ShowTitle>false</ShowTitle>
+					<ExtendedTooltip name="ГруппаНавигацияПоДеталямРасширеннаяПодсказка" id="188"/>
+					<ChildItems>
+						<LabelField name="СсылкаПоДеталям" id="195">
+							<DataPath>СсылкаПоДеталям</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<AutoMaxWidth>false</AutoMaxWidth>
+							<HorizontalStretch>true</HorizontalStretch>
+							<Font ref="style:LargeTextFont" kind="StyleItem"/>
+							<ContextMenu name="СсылкаПоДеталямКонтекстноеМеню" id="196"/>
+							<ExtendedTooltip name="СсылкаПоДеталямРасширеннаяПодсказка" id="197"/>
+						</LabelField>
+						<SpreadSheetDocumentField name="НавигацияПоДеталям" id="189">
+							<DataPath>НавигацияПоДеталям</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<ContextMenu name="НавигацияПоДеталямКонтекстноеМеню" id="190"/>
+							<ExtendedTooltip name="НавигацияПоДеталямРасширеннаяПодсказка" id="191"/>
+							<Events>
+								<Event name="DetailProcessing">НавигацияПоДеталямОбработкаРасшифровки</Event>
+							</Events>
+						</SpreadSheetDocumentField>
+					</ChildItems>
+				</Page>
+			</ChildItems>
+		</Pages>
+	</ChildItems>
+	<Attributes>
+		<Attribute name="Объект" id="1">
+			<Type>
+				<v8:Type>cfg:ExternalDataProcessorObject.INTEGRATION_TOOLS_RM</v8:Type>
+			</Type>
+			<MainAttribute>true</MainAttribute>
+			<Save>
+				<Field>1/0:3b997d3a-ed75-4b41-8bbf-8bd1098fe9a0</Field>
+				<Field>1/0:ed4a841d-733b-48ad-8855-9b7082a271f3</Field>
+				<Field>1/0:f045b8e5-217b-498f-80ee-d83c51cae1eb/1</Field>
+				<Field>1/0:f045b8e5-217b-498f-80ee-d83c51cae1eb/2</Field>
+			</Save>
+		</Attribute>
+		<Attribute name="ВыполнитьОтчет" id="2">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Выполнить отчет</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="НавигацияПоДеталям" id="4">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Навигация по деталям</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type xmlns:mxl="http://v8.1c.ru/8.2/data/spreadsheet">mxl:SpreadsheetDocument</v8:Type>
+			</Type>
+		</Attribute>
+		<Attribute name="СсылкаПоДеталям" id="5">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Ссылка по деталям</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:TypeSet>cfg:AnyRef</v8:TypeSet>
+			</Type>
+		</Attribute>
+	</Attributes>
+	<Commands>
+		<Command name="ОткрытьЛоги" id="5">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Открыть логи</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Открыть логи</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>ОткрытьЛоги</Action>
+		</Command>
+		<Command name="Записи" id="1">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Записи</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Записи</v8:content>
+				</v8:item>
+			</ToolTip>
+		</Command>
+	</Commands>
+</Form>
