@@ -13,8 +13,8 @@
 	ПараметрыРегистрации.БезопасныйРежим = Ложь;
 	
 	НоваяКоманда = ПараметрыРегистрации.Команды.Добавить();
-	НоваяКоманда.Представление = НСтр("ru = 'SHOW_VISUAL_TOOL'");
-	НоваяКоманда.Идентификатор = "SHOW_VISUAL_TOOL";
+	НоваяКоманда.Представление = НСтр("ru = 'SHOW_FORM'");
+	НоваяКоманда.Идентификатор = "INTEGRATION_TOOLS_RM_v2_SHOWFORM";
 	НоваяКоманда.Использование = ДополнительныеОтчетыИОбработкиКлиентСервер.ТипКомандыОткрытиеФормы();
 	НоваяКоманда.ПоказыватьОповещение = Истина;
 	
@@ -309,7 +309,6 @@ EndFunction
 	
 	Возврат ДанныеОбъекта;
 КонецФункции
-
 
 //
 Функция РаспознатьКоллекциюВСхеме(Схема, ИменаКоллекций = "rows,items")
@@ -908,7 +907,7 @@ function GetJSONQuery(absoluteURL, ДанныеЗапроса, ДопПарам�
 	
 	СтруктураURL = РазобратьURL(absoluteURL);
 
-	HTTPЗапрос = Новый HTTPЗапрос(СтруктураURL.endpoint + "?" + КонтрольМаркиЧестныйЗнак.КодироватьПараметрыЗапроса(ДанныеЗапроса), Заголовки);
+	HTTPЗапрос = Новый HTTPЗапрос(СтруктураURL.endpoint + "?" + КодироватьПараметрыЗапроса(ДанныеЗапроса), Заголовки);
 	
 	Если СтруктураURL.isSSL Тогда
 		СертификатыУЦ = Новый СертификатыУдостоверяющихЦентровОС();
@@ -1115,16 +1114,16 @@ Function GetMapProperty(obj, path, failure = false, breadcrumbs = "")
 	Fields = StrSplit(path, ".");
 	breadcrumbs = "";
 	value = obj;
-	For each key in Fields Do
-		value = value.get(key);
+	For each k in Fields Do
+		value = value.get(k);
 		If value = undefined Then
 			break;
 		Elsif TypeOf(value) = Type("Map") Then
-			breadcrumbs = breadcrumbs + key + ".";
+			breadcrumbs = breadcrumbs + k + ".";
 		EndIf;
 	EndDo;
 	
-	breadcrumbs = breadcrumbs + key;
+	breadcrumbs = breadcrumbs + k;
 	failure = path <> breadcrumbs;
 	
 	Return value;
