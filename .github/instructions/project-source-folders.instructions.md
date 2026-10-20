@@ -13,6 +13,15 @@ Use these repository-root paths for local 1C source dumps:
 
 These source dumps are local working files and are ignored by Git; do not add them to commits unless explicitly requested. The README files in these directories are tracked and explain their purpose. Build scripts and local build resources are under `.build/`.
 
+## Branch names for extensions and external processors
+
+When creating a working branch for an extension or external processor, use the source folder name as the branch name:
+
+- `extensions/<extension-name>/` → `extensions/<extension-name>`
+- `external/<processor-name>` → `external/<processor-name>`
+
+Create the branch from `main` before force-adding the ignored source dump. Keep the working branch separate from `main`; publish the completed release as an annotated tag, not as a remote branch.
+
 ## How to read build commands
 
 The build scripts are simple wrappers around the 1C Designer command line. Their arguments are positional:
