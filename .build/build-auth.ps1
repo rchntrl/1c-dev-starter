@@ -9,7 +9,7 @@ function Read-BuildParameters {
     }
 
     $parameters = @{}
-    $supportedKeys = @('username', 'password', 'platform', 'configuration', 'extension')
+    $supportedKeys = @('username', 'password', 'platform', 'configuration', 'extension', 'external', 'infobase')
     foreach ($line in Get-Content -LiteralPath $Path -Encoding UTF8) {
         if ([string]::IsNullOrWhiteSpace($line) -or $line -match '^\s*#') {
             continue
@@ -71,4 +71,20 @@ function Get-DesignerAuthenticationArguments {
     }
 
     return @('/N', [string]$Parameters['username'], '/P', [string]$Parameters['password'])
+}
+
+function Get-DesignerInfobaseArguments {
+    param(
+        [Parameter(Mandatory = $true)]
+        [hashtable]$Parameters,
+
+        [Parameter(Mandatory = $true)]
+        [string]$DefaultPath
+    )
+
+    if (-not [string]::IsNullOrWhiteSpace($Parameters['infobase'])) {
+        return @('/IBConnectionString', [string]$Parameters['infobase'])
+    }
+
+    return @('/F', $DefaultPath)
 }

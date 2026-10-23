@@ -17,6 +17,7 @@ $designerAuthenticationArguments = Get-DesignerAuthenticationArguments -Paramete
 $root = Split-Path -Parent $PSScriptRoot
 $designer = "C:\Program Files (x86)\1cv8\$Platform\bin\1cv8.exe"
 $infobase = Join-Path $PSScriptRoot 'ib'
+$infobaseArguments = Get-DesignerInfobaseArguments -Parameters $buildParameters -DefaultPath $infobase
 $source = Join-Path (Join-Path $root 'extensions') $Extension
 $logs = Join-Path $PSScriptRoot 'logs'
 $dumpInfo = Join-Path $source 'ConfigDumpInfo.xml'
@@ -42,7 +43,10 @@ if (-not (Test-Path -LiteralPath (Join-Path $source 'Configuration.xml') -PathTy
 
 New-Item -ItemType Directory -Path $logs -Force | Out-Null
 
-if (-not (Test-Path -LiteralPath (Join-Path $infobase '1Cv8.1CD') -PathType Leaf)) {
+if ($buildParameters['infobase']) {
+    Write-Host "[1/3] Using infobase: $($buildParameters['infobase'])"
+}
+elseif (-not (Test-Path -LiteralPath (Join-Path $infobase '1Cv8.1CD') -PathType Leaf)) {
     Write-Host "[1/3] Creating empty infobase: $infobase"
     New-Item -ItemType Directory -Path $infobase -Force | Out-Null
     & $designer CREATEINFOBASE "File=$infobase" /DisableStartupDialogs /DisableStartupMessages /Out (Join-Path $logs 'create.log')
@@ -67,7 +71,7 @@ $previousErrorActionPreference = $ErrorActionPreference
 Set-Content -LiteralPath $loadConsoleLog -Value '' -NoNewline
 try {
     $ErrorActionPreference = 'Continue'
-    & $designer DESIGNER /F $infobase @designerAuthenticationArguments /DisableStartupDialogs /DisableStartupMessages /LoadConfigFromFiles $source -Extension $Extension /UpdateDBCfg /Out (Join-Path $logs 'load-extension.log') 2>&1 |
+    & $designer DESIGNER @infobaseArguments @designerAuthenticationArguments /DisableStartupDialogs /DisableStartupMessages /LoadConfigFromFiles $source -Extension $Extension /UpdateDBCfg /Out (Join-Path $logs 'load-extension.log') 2>&1 |
         Tee-Object -FilePath $loadConsoleLog
     $loadExitCode = $LASTEXITCODE
 }
@@ -92,7 +96,7 @@ if ($loadExitCode -ne 0) {
 }
 
 Write-Host "[3/3] Dumping $output"
-& $designer DESIGNER /F $infobase @designerAuthenticationArguments /DisableStartupDialogs /DisableStartupMessages /DumpCfg $output -Extension $Extension /Out (Join-Path $logs 'dump-extension.log')
+& $designer DESIGNER @infobaseArguments @designerAuthenticationArguments /DisableStartupDialogs /DisableStartupMessages /DumpCfg $output -Extension $Extension /Out (Join-Path $logs 'dump-extension.log')
 if ($LASTEXITCODE -ne 0) {
     Write-Host "[ERROR] DumpCfg failed, see $(Join-Path $logs 'dump-extension.log')"
     if (Test-Path -LiteralPath (Join-Path $logs 'dump-extension.log')) {

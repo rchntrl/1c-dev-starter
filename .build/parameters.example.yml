@@ -5,3 +5,5 @@
 # platform: "8.3.24.1691"
 # configuration: "1Cv8"
 # extension: "GS"
+# external: "MyProcessor"
+# infobase: 'Srvr="server";Ref="base";'

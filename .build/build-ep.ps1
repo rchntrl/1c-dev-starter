@@ -13,10 +13,14 @@ $buildParameters = Read-BuildParameters -Path $parametersFile
 if ([string]::IsNullOrWhiteSpace($Platform)) {
     $Platform = if ($buildParameters['platform']) { $buildParameters['platform'] } else { '8.3.24.1691' }
 }
+if ([string]::IsNullOrWhiteSpace($Processing)) {
+    $Processing = if ($buildParameters['external']) { $buildParameters['external'] }
+}
 $designerAuthenticationArguments = Get-DesignerAuthenticationArguments -Parameters $buildParameters
 $root = Split-Path -Parent $PSScriptRoot
 $designer = "C:\Program Files (x86)\1cv8\$Platform\bin\1cv8.exe"
 $infobase = Join-Path $PSScriptRoot 'ib'
+$infobaseArguments = Get-DesignerInfobaseArguments -Parameters $buildParameters -DefaultPath $infobase
 $source = Join-Path (Join-Path $root 'external') "$Processing.xml"
 $logs = Join-Path $PSScriptRoot 'logs'
 $buildDate = Get-Date -Format 'yyyy-MM-dd'
@@ -25,7 +29,8 @@ $buildLog = Join-Path $logs 'build-external.log'
 $createLog = Join-Path $logs 'create.log'
 if ([string]::IsNullOrEmpty($Processing)) {
     Write-Host '[ERROR] External processing name is required.'
-    Write-Host '        Usage: build-ep.ps1 <external-processing-name> [platform-version]'
+    Write-Host '        Usage: build-ep.ps1 [external-processing-name] [platform-version]'
+    Write-Host "        Pass the name as an argument or set 'external' in parameters.yml."
     exit 1
 }
 
@@ -47,7 +52,10 @@ if (-not (Test-Path -LiteralPath $source -PathType Leaf)) {
 
 New-Item -ItemType Directory -Path $logs -Force | Out-Null
 
-if (-not (Test-Path -LiteralPath (Join-Path $infobase '1Cv8.1CD') -PathType Leaf)) {
+if ($buildParameters['infobase']) {
+    Write-Host "[1/2] Using infobase: $($buildParameters['infobase'])"
+}
+elseif (-not (Test-Path -LiteralPath (Join-Path $infobase '1Cv8.1CD') -PathType Leaf)) {
     Write-Host "[1/2] Creating empty infobase: $infobase"
     New-Item -ItemType Directory -Path $infobase -Force | Out-Null
     & $designer CREATEINFOBASE "File=$infobase" /DisableStartupDialogs /DisableStartupMessages /Out $createLog
@@ -69,7 +77,7 @@ $previousArtifact = Get-Item -LiteralPath $output -ErrorAction SilentlyContinue
 Set-Content -LiteralPath $buildLog -Value '' -NoNewline
 try {
     $ErrorActionPreference = 'Continue'
-    & $designer DESIGNER /F $infobase @designerAuthenticationArguments /DisableStartupDialogs /DisableStartupMessages /LoadExternalDataProcessorOrReportFromFiles $source $output /Out $buildLog
+    & $designer DESIGNER @infobaseArguments @designerAuthenticationArguments /DisableStartupDialogs /DisableStartupMessages /LoadExternalDataProcessorOrReportFromFiles $source $output /Out $buildLog
     $buildExitCode = $LASTEXITCODE
 }
 finally {
