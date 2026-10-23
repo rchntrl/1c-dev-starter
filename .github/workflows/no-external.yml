@@ -1,0 +1,32 @@
+# Запрещает вливать в основную ветку коммиты, которые добавляют или изменяют
+# файлы в external/ (внешние отчёты и обработки) или extensions/ (расширения).
+# Удаление файлов и README.md этих каталогов разрешены. Серверная пара к хуку
+# .githooks/pre-push.
+
+name: no-external
+
+on:
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Проверить, что PR не добавляет выгрузки расширений и обработок
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          files=$(git -c core.quotepath=off log --format= --name-only --diff-filter=ACMRT "$BASE_SHA..$HEAD_SHA" -- external/ extensions/ ':(exclude)external/README.md' ':(exclude)extensions/README.md' | sort -u)
+
+          if [ -n "$files" ]; then
+            echo "::error::В ${GITHUB_BASE_REF} нельзя добавлять выгрузки из external/ и extensions/:"
+            echo "$files" | sed 's/^/  /'
+            echo "Уберите эти файлы из коммитов (git rm --cached ...)."
+            exit 1
+          fi

@@ -1,0 +1,39 @@
+#!/bin/sh
+# Запрещает пушить в основную ветку коммиты, которые добавляют или изменяют
+# файлы в external/ (внешние отчёты и обработки) или extensions/ (расширения).
+# Удаление файлов и README.md этих каталогов разрешены.
+#
+# Подключение (один раз на клон):  git config core.hooksPath .githooks
+# Обойти в исключительном случае:   git push --no-verify
+
+protected_branches="refs/heads/master refs/heads/main"
+zero=$(git hash-object --stdin </dev/null | tr '0-9a-f' '0')
+
+status=0
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+	case " $protected_branches " in
+		*" $remote_ref "*) ;;
+		*) continue ;;
+	esac
+
+	# Удаление ветки на сервере — проверять нечего.
+	[ "$local_sha" = "$zero" ] && continue
+
+	if [ "$remote_sha" = "$zero" ]; then
+		range="$local_sha --not --remotes"
+	else
+		range="$remote_sha..$local_sha"
+	fi
+
+	files=$(git -c core.quotepath=off log --format= --name-only --diff-filter=ACMRT $range -- external/ extensions/ ':(exclude)external/README.md' ':(exclude)extensions/README.md' | sort -u)
+
+	if [ -n "$files" ]; then
+		echo "pre-push: в ${remote_ref#refs/heads/} нельзя добавлять выгрузки из external/ и extensions/:" >&2
+		echo "$files" | sed 's/^/  /' >&2
+		echo "Уберите эти файлы из коммитов (git rm --cached ...) или пушьте в другую ветку." >&2
+		status=1
+	fi
+done
+
+exit $status
