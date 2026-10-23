@@ -67,7 +67,7 @@ Claude скопирует каталог `.claude/skills/` из этого ре�
 
 - `.build/build-cf.ps1` / `.build/build-cf.bat` — сборка `.cf` из XML-выгрузки в `conf`;
 - `.build/build-cfe.ps1` / `.build/build-cfe.bat` — сборка расширения из `extensions`;
-- `.build/build-ep.ps1` / `.build/build-ep.bat` — сборка внешней обработки из XML-выгрузки в `external`.
+- `.build/build-ep.ps1` / `.build/build-ep.bat` — сборка внешней обработки (`.epf`) или внешнего отчёта (`.erf`) из XML-выгрузки в `external`.
 
 ### Как читать команды сборки
 
@@ -82,10 +82,11 @@ Claude скопирует каталог `.claude/skills/` из этого ре�
 
 Здесь:
 
-- `build-ep.ps1` и `build-ep.bat` — сценарии сборки внешней обработки;
+- `build-ep.ps1` и `build-ep.bat` — сценарии сборки внешней обработки или отчёта;
 - `MyProcessor` — имя исходного XML-файла без расширения `.xml`;
 - сценарий ищет файл `external\MyProcessor.xml`;
-- финальный артефакт сохраняется в корне проекта как `MyProcessor_YYYY-MM-DD.epf`.
+- финальный артефакт сохраняется в корне проекта как `MyProcessor_YYYY-MM-DD.epf`
+  (для внешнего отчёта — `.erf`, тип определяется по корневому элементу выгрузки).
 
 Для конфигурации и расширения также можно выбрать любой вариант:
 

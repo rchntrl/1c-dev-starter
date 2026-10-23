@@ -14,3 +14,6 @@ extensions/*
 !extensions/README.md
 external/*
 !external/README.md
+
+# Локальный реестр баз навыков cc-1c-skills (содержит пароли)
+.v8-project.json

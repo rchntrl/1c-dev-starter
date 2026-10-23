@@ -24,12 +24,11 @@ $infobaseArguments = Get-DesignerInfobaseArguments -Parameters $buildParameters 
 $source = Join-Path (Join-Path $root 'external') "$Processing.xml"
 $logs = Join-Path $PSScriptRoot 'logs'
 $buildDate = Get-Date -Format 'yyyy-MM-dd'
-$output = Join-Path $root "${Processing}_${buildDate}.epf"
 $buildLog = Join-Path $logs 'build-external.log'
 $createLog = Join-Path $logs 'create.log'
 if ([string]::IsNullOrEmpty($Processing)) {
-    Write-Host '[ERROR] External processing name is required.'
-    Write-Host '        Usage: build-ep.ps1 [external-processing-name] [platform-version]'
+    Write-Host '[ERROR] External processing or report name is required.'
+    Write-Host '        Usage: build-ep.ps1 [external-processing-or-report-name] [platform-version]'
     Write-Host "        Pass the name as an argument or set 'external' in parameters.yml."
     exit 1
 }
@@ -49,6 +48,9 @@ if (-not (Test-Path -LiteralPath $source -PathType Leaf)) {
     Write-Host "[ERROR] Source XML not found: $source"
     exit 1
 }
+$isReport = Select-String -LiteralPath $source -Pattern '<ExternalReport[\s>]' -Quiet
+$artifactExtension = if ($isReport) { 'erf' } else { 'epf' }
+$output = Join-Path $root "${Processing}_${buildDate}.$artifactExtension"
 
 New-Item -ItemType Directory -Path $logs -Force | Out-Null
 
@@ -113,7 +115,7 @@ $buildFailed = $null -ne $buildExitCode -and $buildExitCode -ne 0
 if (-not $completionConfirmed) {
     $exitCodeText = if ($null -eq $buildExitCode) { 'unavailable' } else { $buildExitCode }
     Write-Host "[ERROR] Build completion was not confirmed (Designer rc=$exitCodeText), see $buildLog"
-    Write-Host "        Completion: $completedSuccessfully; target: $reportedOutput; EPF updated: $artifactUpdated"
+    Write-Host "        Completion: $completedSuccessfully; target: $reportedOutput; $($artifactExtension.ToUpper()) updated: $artifactUpdated"
     if (Test-Path -LiteralPath $buildLog) {
         Get-Content -LiteralPath $buildLog
     }
@@ -123,7 +125,7 @@ if (-not $completionConfirmed) {
     exit 1
 }
 if ($buildFailed) {
-    Write-Host "[WARNING] Designer returned code $buildExitCode, but the current build log confirms completion and the EPF exists."
+    Write-Host "[WARNING] Designer returned code $buildExitCode, but the current build log confirms completion and the $($artifactExtension.ToUpper()) exists."
 }
 
 Write-Host "`n[OK] $output"
