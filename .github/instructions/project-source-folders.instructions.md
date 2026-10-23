@@ -13,38 +13,29 @@ Use these repository-root paths for local 1C source dumps:
 
 These source dumps are local working files and are ignored by Git; do not add them to commits unless explicitly requested. The README files in these directories are tracked and explain their purpose. Build scripts and local build resources are under `.build/`.
 
-## Branch names for extensions and external processors
-
-When creating a working branch for an extension or external processor, use the source folder name as the branch name:
-
-- `extensions/<extension-name>/` → `extensions/<extension-name>`
-- `external/<processor-name>` → `external/<processor-name>`
-
-Create the branch from `main` before force-adding the ignored source dump. Keep the working branch separate from `main`; publish the completed release as an annotated tag, not as a remote branch.
-
 ## How to read build commands
 
 The build scripts are simple wrappers around the 1C Designer command line. Their arguments are positional:
 
 - `build-ep.ps1` or `build-ep.bat` `<external-processing-name> [platform-version]`
-  - `<external-processing-name>` is the source XML filename without the `.xml` extension, for example `INTEGRATION_TOOLS_RMv2.0`.
-  - The script looks for `external/INTEGRATION_TOOLS_RMv2.0.xml` in the repository root.
+  - `<external-processing-name>` is the source XML filename without the `.xml` extension, for example `MyProcessor`.
+  - The script looks for `external/MyProcessor.xml` in the repository root.
   - If the second argument is omitted, it uses the default platform version `8.3.24.1691`.
   - The generated artifact is saved in the project root as `<name>_YYYY-MM-DD.epf`.
 
 For example:
 
 ```powershell
-.\.build\build-ep.ps1 INTEGRATION_TOOLS_RMv2.0
-.\.build\build-ep.bat INTEGRATION_TOOLS_RMv2.0
+.\.build\build-ep.ps1 MyProcessor
+.\.build\build-ep.bat MyProcessor
 ```
 
 means:
 
-- read the XML file `external\INTEGRATION_TOOLS_RMv2.0.xml`;
+- read the XML file `external\MyProcessor.xml`;
 - create or reuse the local infobase under `.build\ib`;
 - load it through 1C Designer to build the external processing;
-- save the result as `INTEGRATION_TOOLS_RMv2.0_YYYY-MM-DD.epf` in the repository root.
+- save the result as `MyProcessor_YYYY-MM-DD.epf` in the repository root.
 
 Use the same pattern for other build scripts:
 
