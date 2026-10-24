@@ -50,7 +50,7 @@ if ($buildParameters['infobase']) {
 elseif (-not (Test-Path -LiteralPath (Join-Path $infobase '1Cv8.1CD') -PathType Leaf)) {
     Write-Host "[1/3] Creating empty infobase: $infobase"
     New-Item -ItemType Directory -Path $infobase -Force | Out-Null
-    & $designer CREATEINFOBASE "File=$infobase" /DisableStartupDialogs /DisableStartupMessages /Out (Join-Path $logs 'create.log')
+    & $designer CREATEINFOBASE "File=$infobase" /DisableStartupDialogs /DisableStartupMessages /Out (Join-Path $logs 'create.log') | Out-Null
     if ($LASTEXITCODE -ne 0) {
         Write-Host "[ERROR] CREATEINFOBASE failed, see $(Join-Path $logs 'create.log')"
         if (Test-Path -LiteralPath (Join-Path $logs 'create.log')) {
@@ -97,6 +97,9 @@ if ($loadExitCode -ne 0) {
 }
 
 Write-Host "[3/3] Dumping $output"
+if (Test-Path -LiteralPath $output -PathType Leaf) {
+    Remove-Item -LiteralPath $output -Force
+}
 $previousErrorActionPreference = $ErrorActionPreference
 Set-Content -LiteralPath $dumpConsoleLog -Value '' -NoNewline
 try {

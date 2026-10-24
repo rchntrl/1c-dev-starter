@@ -25,6 +25,7 @@ $dumpInfoBackup = Join-Path $PSScriptRoot 'ConfigDumpInfo.xml.bak'
 $buildDate = Get-Date -Format 'yyyy-MM-dd'
 $output = Join-Path $root "${Extension}_${buildDate}.cfe"
 $loadConsoleLog = Join-Path $logs 'load-extension-console.log'
+$dumpConsoleLog = Join-Path $logs 'dump-extension-console.log'
 if (-not (Test-Path -LiteralPath $designer -PathType Leaf)) {
     Write-Host "[ERROR] Platform not found: `"$designer`""
     $platformRoot = 'C:\Program Files (x86)\1cv8'
@@ -49,7 +50,7 @@ if ($buildParameters['infobase']) {
 elseif (-not (Test-Path -LiteralPath (Join-Path $infobase '1Cv8.1CD') -PathType Leaf)) {
     Write-Host "[1/3] Creating empty infobase: $infobase"
     New-Item -ItemType Directory -Path $infobase -Force | Out-Null
-    & $designer CREATEINFOBASE "File=$infobase" /DisableStartupDialogs /DisableStartupMessages /Out (Join-Path $logs 'create.log')
+    & $designer CREATEINFOBASE "File=$infobase" /DisableStartupDialogs /DisableStartupMessages /Out (Join-Path $logs 'create.log') | Out-Null
     if ($LASTEXITCODE -ne 0) {
         Write-Host "[ERROR] CREATEINFOBASE failed, see $(Join-Path $logs 'create.log')"
         if (Test-Path -LiteralPath (Join-Path $logs 'create.log')) {
@@ -96,13 +97,32 @@ if ($loadExitCode -ne 0) {
 }
 
 Write-Host "[3/3] Dumping $output"
-& $designer DESIGNER @infobaseArguments @designerAuthenticationArguments /DisableStartupDialogs /DisableStartupMessages /DumpCfg $output -Extension $Extension /Out (Join-Path $logs 'dump-extension.log')
-if ($LASTEXITCODE -ne 0) {
-    Write-Host "[ERROR] DumpCfg failed, see $(Join-Path $logs 'dump-extension.log')"
-    if (Test-Path -LiteralPath (Join-Path $logs 'dump-extension.log')) {
+if (Test-Path -LiteralPath $output -PathType Leaf) {
+    Remove-Item -LiteralPath $output -Force
+}
+$previousErrorActionPreference = $ErrorActionPreference
+Set-Content -LiteralPath $dumpConsoleLog -Value '' -NoNewline
+try {
+    $ErrorActionPreference = 'Continue'
+    & $designer DESIGNER @infobaseArguments @designerAuthenticationArguments /DisableStartupDialogs /DisableStartupMessages /DumpCfg $output -Extension $Extension /Out (Join-Path $logs 'dump-extension.log') 2>&1 |
+        Tee-Object -FilePath $dumpConsoleLog
+    $dumpExitCode = $LASTEXITCODE
+}
+finally {
+    $ErrorActionPreference = $previousErrorActionPreference
+}
+
+if ($dumpExitCode -ne 0) {
+    Write-Host "[ERROR] DumpCfg failed (rc=$dumpExitCode), see $(Join-Path $logs 'dump-extension.log')"
+    if ((Test-Path -LiteralPath (Join-Path $logs 'dump-extension.log')) -and
+        (Get-Item -LiteralPath (Join-Path $logs 'dump-extension.log')).Length -gt 3) {
         Get-Content -LiteralPath (Join-Path $logs 'dump-extension.log')
     }
-    exit 1
+    Write-Host "Designer console output: $dumpConsoleLog"
+    if (Test-Path -LiteralPath $dumpConsoleLog -PathType Leaf) {
+        Get-Content -LiteralPath $dumpConsoleLog
+    }
+    exit $dumpExitCode
 }
 if (-not (Test-Path -LiteralPath $output -PathType Leaf)) {
     Write-Host "[ERROR] Extension package was not created: $output"

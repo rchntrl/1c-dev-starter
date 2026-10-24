@@ -60,7 +60,7 @@ if ($buildParameters['infobase']) {
 elseif (-not (Test-Path -LiteralPath (Join-Path $infobase '1Cv8.1CD') -PathType Leaf)) {
     Write-Host "[1/2] Creating empty infobase: $infobase"
     New-Item -ItemType Directory -Path $infobase -Force | Out-Null
-    & $designer CREATEINFOBASE "File=$infobase" /DisableStartupDialogs /DisableStartupMessages /Out $createLog
+    & $designer CREATEINFOBASE "File=$infobase" /DisableStartupDialogs /DisableStartupMessages /Out $createLog | Out-Null
     if ($LASTEXITCODE -ne 0) {
         Write-Host "[ERROR] CREATEINFOBASE failed, see $createLog"
         if (Test-Path -LiteralPath $createLog) {
