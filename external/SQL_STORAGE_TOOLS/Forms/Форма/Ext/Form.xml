@@ -369,11 +369,62 @@
 												<Event name="OnChange">ВидЗапросаПриИзменении</Event>
 											</Events>
 										</RadioButtonField>
-										<Button name="ВыполнитьВыборку" id="265">
-											<Type>UsualButton</Type>
-											<CommandName>Form.Command.ВыполнитьВыборку</CommandName>
-											<ExtendedTooltip name="ВыполнитьВыборкуРасширеннаяПодсказка" id="266"/>
-										</Button>
+										<UsualGroup name="ГруппаПараметрыВыборки" id="353">
+											<Group>Horizontal</Group>
+											<Representation>None</Representation>
+											<ShowTitle>false</ShowTitle>
+											<ExtendedTooltip name="ГруппаПараметрыВыборкиРасширеннаяПодсказка" id="354"/>
+											<ChildItems>
+											<Button name="ВыполнитьВыборку" id="265">
+												<Type>UsualButton</Type>
+												<CommandName>Form.Command.ВыполнитьВыборку</CommandName>
+												<ExtendedTooltip name="ВыполнитьВыборкуРасширеннаяПодсказка" id="266"/>
+											</Button>
+											<RadioButtonField name="СпособОткрытияСсылки" id="350">
+												<DataPath>Объект.СпособОткрытияСсылки</DataPath>
+												<TitleLocation>Left</TitleLocation>
+												<RadioButtonType>Tumbler</RadioButtonType>
+												<ChoiceList>
+													<xr:Item>
+														<xr:Presentation/>
+														<xr:CheckState>0</xr:CheckState>
+														<xr:Value xsi:type="FormChoiceListDesTimeValue">
+															<Presentation>
+																<v8:item>
+																	<v8:lang>ru</v8:lang>
+																	<v8:content>Ссылкой 1С</v8:content>
+																</v8:item>
+																<v8:item>
+																	<v8:lang>en</v8:lang>
+																	<v8:content>1C reference</v8:content>
+																</v8:item>
+															</Presentation>
+															<Value xsi:type="xs:string">Ссылка</Value>
+														</xr:Value>
+													</xr:Item>
+													<xr:Item>
+														<xr:Presentation/>
+														<xr:CheckState>0</xr:CheckState>
+														<xr:Value xsi:type="FormChoiceListDesTimeValue">
+															<Presentation>
+																<v8:item>
+																	<v8:lang>ru</v8:lang>
+																	<v8:content>Навигационной ссылкой</v8:content>
+																</v8:item>
+																<v8:item>
+																	<v8:lang>en</v8:lang>
+																	<v8:content>Navigation link</v8:content>
+																</v8:item>
+															</Presentation>
+															<Value xsi:type="xs:string">НавигационнаяСсылка</Value>
+														</xr:Value>
+													</xr:Item>
+												</ChoiceList>
+												<ContextMenu name="СпособОткрытияСсылкиКонтекстноеМеню" id="351"/>
+												<ExtendedTooltip name="СпособОткрытияСсылкиРасширеннаяПодсказка" id="352"/>
+											</RadioButtonField>
+											</ChildItems>
+										</UsualGroup>
 										<InputField name="SQLСкрипт" id="257">
 											<DataPath>Объект.SQLСкрипт</DataPath>
 											<ReadOnly>true</ReadOnly>
@@ -404,28 +455,128 @@
 											<Title>
 												<v8:item>
 													<v8:lang>ru</v8:lang>
-													<v8:content>Основной отбор</v8:content>
+													<v8:content>Поля и отбор</v8:content>
 												</v8:item>
 												<v8:item>
 													<v8:lang>en</v8:lang>
-													<v8:content>Main filter</v8:content>
+													<v8:content>Fields and filter</v8:content>
 												</v8:item>
 											</Title>
 											<ExtendedTooltip name="ГруппаОсновнойОтборРасширеннаяПодсказка" id="343"/>
 											<ChildItems>
+												<CheckBoxField name="ВыбиратьПоляСоединений" id="374">
+													<DataPath>Объект.ВыбиратьПоляСоединений</DataPath>
+													<TitleLocation>Right</TitleLocation>
+													<CheckBoxType>Auto</CheckBoxType>
+													<ContextMenu name="ВыбиратьПоляСоединенийКонтекстноеМеню" id="375"/>
+													<ExtendedTooltip name="ВыбиратьПоляСоединенийРасширеннаяПодсказка" id="376"/>
+													<Events>
+														<Event name="OnChange">ВыбиратьПоляСоединенийПриИзменении</Event>
+													</Events>
+												</CheckBoxField>
+												<Table name="ВыбранныеПоля" id="355">
+													<Representation>List</Representation>
+													<Title>
+														<v8:item>
+															<v8:lang>ru</v8:lang>
+															<v8:content>Поля выборки</v8:content>
+														</v8:item>
+														<v8:item>
+															<v8:lang>en</v8:lang>
+															<v8:content>Selection fields</v8:content>
+														</v8:item>
+													</Title>
+													<TitleLocation>Top</TitleLocation>
+													<ToolTip>
+														<v8:item>
+															<v8:lang>ru</v8:lang>
+															<v8:content>Поля основной таблицы главного объекта для выборки в порядке списка. Если список пуст, выбираются все поля</v8:content>
+														</v8:item>
+														<v8:item>
+															<v8:lang>en</v8:lang>
+															<v8:content>Main table fields of the main object to select, in list order. If the list is empty, all fields are selected</v8:content>
+														</v8:item>
+													</ToolTip>
+													<ToolTipRepresentation>Button</ToolTipRepresentation>
+													<HeightInTableRows>4</HeightInTableRows>
+													<DataPath>Объект.ВыбранныеПоля</DataPath>
+													<RowFilter xsi:nil="true"/>
+													<ContextMenu name="ВыбранныеПоляКонтекстноеМеню" id="356"/>
+													<AutoCommandBar name="ВыбранныеПоляКоманднаяПанель" id="357"/>
+													<ExtendedTooltip name="ВыбранныеПоляРасширеннаяПодсказка" id="358"/>
+													<SearchStringAddition name="ВыбранныеПоляСтрокаПоиска" id="359">
+														<AdditionSource>
+															<Item>ВыбранныеПоля</Item>
+															<Type>SearchStringRepresentation</Type>
+														</AdditionSource>
+														<ContextMenu name="ВыбранныеПоляСтрокаПоискаКонтекстноеМеню" id="360"/>
+														<ExtendedTooltip name="ВыбранныеПоляСтрокаПоискаРасширеннаяПодсказка" id="361"/>
+													</SearchStringAddition>
+													<ViewStatusAddition name="ВыбранныеПоляСостояниеПросмотра" id="362">
+														<AdditionSource>
+															<Item>ВыбранныеПоля</Item>
+															<Type>ViewStatusRepresentation</Type>
+														</AdditionSource>
+														<ContextMenu name="ВыбранныеПоляСостояниеПросмотраКонтекстноеМеню" id="363"/>
+														<ExtendedTooltip name="ВыбранныеПоляСостояниеПросмотраРасширеннаяПодсказка" id="364"/>
+													</ViewStatusAddition>
+													<SearchControlAddition name="ВыбранныеПоляУправлениеПоиском" id="365">
+														<AdditionSource>
+															<Item>ВыбранныеПоля</Item>
+															<Type>SearchControl</Type>
+														</AdditionSource>
+														<ContextMenu name="ВыбранныеПоляУправлениеПоискомКонтекстноеМеню" id="366"/>
+														<ExtendedTooltip name="ВыбранныеПоляУправлениеПоискомРасширеннаяПодсказка" id="367"/>
+													</SearchControlAddition>
+													<Events>
+														<Event name="OnActivateRow">ВыбранныеПоляПриАктивизацииСтроки</Event>
+														<Event name="OnStartEdit">ВыбранныеПоляПриНачалеРедактирования</Event>
+														<Event name="OnEditEnd">ВыбранныеПоляПриОкончанииРедактирования</Event>
+														<Event name="AfterDeleteRow">ВыбранныеПоляПослеУдаления</Event>
+													</Events>
+													<ChildItems>
+														<InputField name="ВыбранныеПоляИмяТаблицыХранения" id="377">
+															<DataPath>Объект.ВыбранныеПоля.ИмяТаблицыХранения</DataPath>
+															<EditMode>EnterOnInput</EditMode>
+															<ListChoiceMode>true</ListChoiceMode>
+															<ContextMenu name="ВыбранныеПоляИмяТаблицыХраненияКонтекстноеМеню" id="378"/>
+															<ExtendedTooltip name="ВыбранныеПоляИмяТаблицыХраненияРасширеннаяПодсказка" id="379"/>
+															<Events>
+																<Event name="OnChange">ВыбранныеПоляИмяТаблицыХраненияПриИзменении</Event>
+															</Events>
+														</InputField>
+														<InputField name="ВыбранныеПоляПоле" id="368">
+															<DataPath>Объект.ВыбранныеПоля.Поле</DataPath>
+															<ReadOnly>true</ReadOnly>
+															<EditMode>EnterOnInput</EditMode>
+															<ContextMenu name="ВыбранныеПоляПолеКонтекстноеМеню" id="369"/>
+															<ExtendedTooltip name="ВыбранныеПоляПолеРасширеннаяПодсказка" id="370"/>
+														</InputField>
+														<InputField name="ВыбранныеПоляПолеХранения" id="371">
+															<DataPath>Объект.ВыбранныеПоля.ПолеХранения</DataPath>
+															<EditMode>EnterOnInput</EditMode>
+															<ListChoiceMode>true</ListChoiceMode>
+															<ContextMenu name="ВыбранныеПоляПолеХраненияКонтекстноеМеню" id="372"/>
+															<ExtendedTooltip name="ВыбранныеПоляПолеХраненияРасширеннаяПодсказка" id="373"/>
+															<Events>
+																<Event name="OnChange">ВыбранныеПоляПолеХраненияПриИзменении</Event>
+															</Events>
+														</InputField>
+													</ChildItems>
+												</Table>
 												<Table name="ОсновнойОтборЗапроса" id="226">
 													<Representation>List</Representation>
 													<Title>
 														<v8:item>
 															<v8:lang>ru</v8:lang>
-															<v8:content>Основной отбор запроса</v8:content>
+															<v8:content>Основной отбор</v8:content>
 														</v8:item>
 														<v8:item>
 															<v8:lang>en</v8:lang>
-															<v8:content>Main query filter</v8:content>
+															<v8:content>Main filter</v8:content>
 														</v8:item>
 													</Title>
-													<TitleLocation>None</TitleLocation>
+													<TitleLocation>Top</TitleLocation>
 													<HeightInTableRows>5</HeightInTableRows>
 													<DataPath>Объект.ОсновнойОтборЗапроса</DataPath>
 													<RowFilter xsi:nil="true"/>
@@ -479,13 +630,6 @@
 															<Events>
 																<Event name="OnChange">ОсновнойОтборЗапросаОбъектМетаданныхПриИзменении</Event>
 															</Events>
-														</InputField>
-														<InputField name="ОсновнойОтборЗапросаПоле" id="245">
-															<DataPath>Объект.ОсновнойОтборЗапроса.Поле</DataPath>
-															<ReadOnly>true</ReadOnly>
-															<EditMode>EnterOnInput</EditMode>
-															<ContextMenu name="ОсновнойОтборЗапросаПолеКонтекстноеМеню" id="246"/>
-															<ExtendedTooltip name="ОсновнойОтборЗапросаПолеРасширеннаяПодсказка" id="247"/>
 														</InputField>
 														<InputField name="ОсновнойОтборЗапросаПолеХранения" id="248">
 															<DataPath>Объект.ОсновнойОтборЗапроса.ПолеХранения</DataPath>
@@ -834,13 +978,6 @@
 																<Event name="OnChange">ОтборСоединенийИмяТаблицыХраненияПриИзменении</Event>
 															</Events>
 														</InputField>
-														<InputField name="ОтборСоединенийПоле" id="319">
-															<DataPath>Объект.ОтборСоединений.Поле</DataPath>
-															<ReadOnly>true</ReadOnly>
-															<EditMode>EnterOnInput</EditMode>
-															<ContextMenu name="ОтборСоединенийПолеКонтекстноеМеню" id="320"/>
-															<ExtendedTooltip name="ОтборСоединенийПолеРасширеннаяПодсказка" id="321"/>
-														</InputField>
 														<InputField name="ОтборСоединенийПолеХранения" id="322">
 															<DataPath>Объект.ОтборСоединений.ПолеХранения</DataPath>
 															<EditMode>EnterOnInput</EditMode>
@@ -1047,7 +1184,7 @@
 				</v8:item>
 			</ToolTip>
 			<Picture>
-				<xr:Ref>StdPicture.Change</xr:Ref>
+				<xr:Ref>StdPicture.Parameters</xr:Ref>
 				<xr:LoadTransparent>true</xr:LoadTransparent>
 			</Picture>
 			<Action>ПодобратьОбъектыМетаданных</Action>
