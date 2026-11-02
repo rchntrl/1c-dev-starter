@@ -63,12 +63,12 @@
   ```powershell
   git switch main
   git pull --ff-only
-  git switch -c extensions/MyExtension
+  git switch -c extension/MyExtension
   # в .gitignore: !extensions/MyExtension/
   git add .gitignore extensions/MyExtension
   git commit -m "Обновить расширение MyExtension"
-  git tag -a extensions/MyExtension/1.0 -m "MyExtension 1.0"
-  git push origin extensions/MyExtension extensions/MyExtension/1.0
+  git tag -a extension/MyExtension/1.0 -m "MyExtension 1.0"
+  git push origin extension/MyExtension extension/MyExtension/1.0
   ```
 
   Ветка остаётся отдельной от `main` и в неё не вливается. Каждый выпуск
