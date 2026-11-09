@@ -252,6 +252,23 @@
 										<Value xsi:type="xs:string">SQL_TABLE_SIZES</Value>
 									</xr:Value>
 								</xr:Item>
+								<xr:Item>
+									<xr:Presentation/>
+									<xr:CheckState>0</xr:CheckState>
+									<xr:Value xsi:type="FormChoiceListDesTimeValue">
+										<Presentation>
+											<v8:item>
+												<v8:lang>ru</v8:lang>
+												<v8:content>Курсы валют ЦБ РФ</v8:content>
+											</v8:item>
+											<v8:item>
+												<v8:lang>en</v8:lang>
+												<v8:content>CBR exchange rates</v8:content>
+											</v8:item>
+										</Presentation>
+										<Value xsi:type="xs:string">CBR_RATES</Value>
+									</xr:Value>
+								</xr:Item>
 							</ChoiceList>
 							<Font bold="true" kind="AutoFont"/>
 							<ContextMenu name="ВыполнитьОтчетКонтекстноеМеню" id="33"/>

@@ -392,6 +392,7 @@
 			<Form>ФормаУчетныхДанных</Form>
 			<Template>EmptySample</Template>
 			<Template>SQL_TABLE_SIZES</Template>
+			<Template>CBR_RATES</Template>
 		</ChildObjects>
 	</ExternalDataProcessor>
 </MetaDataObject>
