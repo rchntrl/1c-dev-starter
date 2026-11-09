@@ -4,7 +4,6 @@
 *.erf
 .build/*
 !.build/README.md
-!.build/build-*.bat
 !.build/build-*.ps1
 !.build/parameters.example.yml
 .build/parameters.yml
@@ -15,3 +14,6 @@ extensions/*
 external/*
 !external/README.md
 !external/INTEGRATION_TOOLS_RMv2.0*
+
+# Локальный реестр баз навыков cc-1c-skills (содержит пароли)
+.v8-project.json

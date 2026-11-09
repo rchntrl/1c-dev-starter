@@ -7,17 +7,38 @@
 
 ## Начало нового проекта
 
-Навыки Claude Code для работы с 1С в репозиторий не входят. При начале нового
-проекта попросите Claude установить их из репозитория
-[cc-1c-skills](https://github.com/Nikolay-Shirokov/cc-1c-skills), например:
+1. Установите навыки Claude Code для работы с 1С: в репозиторий они не входят.
+   Попросите Claude установить их из репозитория
+   [cc-1c-skills](https://github.com/Nikolay-Shirokov/cc-1c-skills), например:
 
-> Установи в этот проект навыки Claude Code из
-> https://github.com/Nikolay-Shirokov/cc-1c-skills.
+   > Установи в этот проект навыки Claude Code из
+   > https://github.com/Nikolay-Shirokov/cc-1c-skills.
 
-Claude скопирует каталог `.claude/skills/` из этого репозитория в корень
-проекта. Другие способы установки (плагин Claude Code, скрипт `switch.py`)
-описаны в README репозитория навыков. Правила для Claude в `.claude/rules/`
-входят в стартер и устанавливать их не нужно.
+   Claude скопирует каталог `.claude/skills/` из этого репозитория в корень
+   проекта. Другие способы установки (плагин Claude Code, скрипт `switch.py`)
+   описаны в README репозитория навыков. Правила для Claude в `.claude/rules/`
+   входят в стартер и устанавливать их не нужно.
+2. Скопируйте `.build\parameters.example.yml` в `.build\parameters.yml`. Файл
+   исключён из Git.
+3. Укажите в `.build\parameters.yml`:
+   - `platform` — установленную версию платформы (имя каталога в
+     `C:\Program Files (x86)\1cv8`, например `8.3.24.1691`);
+   - `infobase` — строку подключения к копии существующей инфобазы в одинарных
+     кавычках, например `'File="D:\Bases\Copy";'` или
+     `'Srvr="server";Ref="base";'`;
+   - `username` и `password`, если в инфобазе настроены пользователи.
+
+   Указывайте только копию, не рабочую базу: сценарии `build-cf.ps1` и
+   `build-cfe.ps1` изменяют конфигурацию инфобазы. Подробнее — в разделе
+   «Параметры сборки» [README каталога сборки](.build/README.md).
+4. Выгрузите дамп конфигурации инфобазы в `conf`, например попросив Claude:
+
+   > Выгрузи конфигурацию из инфобазы в conf.
+
+   Выгрузка служит справочником для навыков и поиска по коду. Хранить её только
+   локально или добавить в `main`, решайте сами (см. «Правила Git» ниже).
+5. Замените заголовок этого README на имя нового проекта, добавьте его описание
+   и удалите раздел «Начало нового проекта».
 
 ## Правила Git
 
@@ -27,8 +48,8 @@ Claude скопирует каталог `.claude/skills/` из этого ре�
 - Не добавляйте дампы из `extensions` и `external` в `main` и не вливайте в
   `main` ветки разработки.
 - Для изменения расширения или внешней обработки сначала создайте отдельную
-  ветку от `main`. Ветка называется как каталог исходников:
-  `extensions/<имя>` для расширения, `external/<имя>` для внешней обработки.
+  ветку от `main`. Ветка называется по типу и имени выгрузки:
+  `extension/<имя>` для расширения, `external/<имя>` для внешней обработки.
 - По умолчанию каталоги игнорируются. В рабочей ветке добавьте в `.gitignore`
   исключение только для своей выгрузки (`!extensions/<имя>/` или
   `!external/<имя>*`), не снимая игнорирование со всего каталога.
@@ -42,12 +63,12 @@ Claude скопирует каталог `.claude/skills/` из этого ре�
   ```powershell
   git switch main
   git pull --ff-only
-  git switch -c extensions/MyExtension
+  git switch -c extension/MyExtension
   # в .gitignore: !extensions/MyExtension/
   git add .gitignore extensions/MyExtension
   git commit -m "Обновить расширение MyExtension"
-  git tag -a extensions/MyExtension/1.0 -m "MyExtension 1.0"
-  git push origin extensions/MyExtension extensions/MyExtension/1.0
+  git tag -a extension/MyExtension/1.0 -m "MyExtension 1.0"
+  git push origin extension/MyExtension extension/MyExtension/1.0
   ```
 
   Ветка остаётся отдельной от `main` и в неё не вливается. Каждый выпуск
@@ -65,35 +86,33 @@ Claude скопирует каталог `.claude/skills/` из этого ре�
 
 ## Сценарии сборки
 
-- `.build/build-cf.ps1` / `.build/build-cf.bat` — сборка `.cf` из XML-выгрузки в `conf`;
-- `.build/build-cfe.ps1` / `.build/build-cfe.bat` — сборка расширения из `extensions`;
-- `.build/build-ep.ps1` / `.build/build-ep.bat` — сборка внешней обработки из XML-выгрузки в `external`.
+- `.build/build-cf.ps1` — сборка `.cf` из XML-выгрузки в `conf`;
+- `.build/build-cfe.ps1` — сборка расширения из `extensions`;
+- `.build/build-ep.ps1` — сборка внешней обработки (`.epf`) или внешнего отчёта (`.erf`) из XML-выгрузки в `external`.
 
 ### Как читать команды сборки
 
-Оба варианта запускаются из корня репозитория. Для PowerShell используйте
-`.ps1`, для командной строки Windows — `.bat`. Аргументы указываются в одном
-порядке: имя исходного артефакта, затем (необязательно) версия платформы.
+Сценарии запускаются из корня репозитория в PowerShell. Аргументы указываются
+в одном порядке: имя исходного артефакта, затем (необязательно) версия
+платформы.
 
 ```powershell
 .\.build\build-ep.ps1 MyProcessor
-.\.build\build-ep.bat MyProcessor
 ```
 
 Здесь:
 
-- `build-ep.ps1` и `build-ep.bat` — сценарии сборки внешней обработки;
+- `build-ep.ps1` — сценарий сборки внешней обработки или отчёта;
 - `MyProcessor` — имя исходного XML-файла без расширения `.xml`;
 - сценарий ищет файл `external\MyProcessor.xml`;
-- финальный артефакт сохраняется в корне проекта как `MyProcessor_YYYY-MM-DD.epf`.
+- финальный артефакт сохраняется в корне проекта как `MyProcessor_YYYY-MM-DD.epf`
+  (для внешнего отчёта — `.erf`, тип определяется по корневому элементу выгрузки).
 
-Для конфигурации и расширения также можно выбрать любой вариант:
+Для конфигурации и расширения:
 
 ```powershell
 .\.build\build-cf.ps1 1Cv8 8.3.24.1691
-.\.build\build-cf.bat 1Cv8 8.3.24.1691
 .\.build\build-cfe.ps1 GS 8.3.24.1691
-.\.build\build-cfe.bat GS 8.3.24.1691
 ```
 
 Имена и версии можно передать аргументами; версии по умолчанию указаны в
