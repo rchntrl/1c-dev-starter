@@ -390,6 +390,8 @@
 			</Attribute>
 			<Form>Форма</Form>
 			<Form>ФормаУчетныхДанных</Form>
+			<Template>EmptySample</Template>
+			<Template>SQL_TABLE_SIZES</Template>
 		</ChildObjects>
 	</ExternalDataProcessor>
 </MetaDataObject>

@@ -205,8 +205,51 @@
 									<xr:Presentation/>
 									<xr:CheckState>0</xr:CheckState>
 									<xr:Value xsi:type="FormChoiceListDesTimeValue">
-										<Presentation/>
-										<Value xsi:type="xs:string"/>
+										<Presentation>
+											<v8:item>
+												<v8:lang>ru</v8:lang>
+												<v8:content>Соединения SQL (sp_who2)</v8:content>
+											</v8:item>
+											<v8:item>
+												<v8:lang>en</v8:lang>
+												<v8:content>SQL connections (sp_who2)</v8:content>
+											</v8:item>
+										</Presentation>
+										<Value xsi:type="xs:string">SQL_TEST</Value>
+									</xr:Value>
+								</xr:Item>
+								<xr:Item>
+									<xr:Presentation/>
+									<xr:CheckState>0</xr:CheckState>
+									<xr:Value xsi:type="FormChoiceListDesTimeValue">
+										<Presentation>
+											<v8:item>
+												<v8:lang>ru</v8:lang>
+												<v8:content>Блокировки SQL (sp_lock)</v8:content>
+											</v8:item>
+											<v8:item>
+												<v8:lang>en</v8:lang>
+												<v8:content>SQL locks (sp_lock)</v8:content>
+											</v8:item>
+										</Presentation>
+										<Value xsi:type="xs:string">SQL_LOCK_TEST</Value>
+									</xr:Value>
+								</xr:Item>
+								<xr:Item>
+									<xr:Presentation/>
+									<xr:CheckState>0</xr:CheckState>
+									<xr:Value xsi:type="FormChoiceListDesTimeValue">
+										<Presentation>
+											<v8:item>
+												<v8:lang>ru</v8:lang>
+												<v8:content>Размер таблиц и индексов SQL</v8:content>
+											</v8:item>
+											<v8:item>
+												<v8:lang>en</v8:lang>
+												<v8:content>SQL table and index sizes</v8:content>
+											</v8:item>
+										</Presentation>
+										<Value xsi:type="xs:string">SQL_TABLE_SIZES</Value>
 									</xr:Value>
 								</xr:Item>
 							</ChoiceList>
