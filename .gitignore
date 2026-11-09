@@ -4,7 +4,6 @@
 *.erf
 .build/*
 !.build/README.md
-!.build/build-*.bat
 !.build/build-*.ps1
 !.build/parameters.example.yml
 .build/parameters.yml
