@@ -93,10 +93,6 @@
 							<v8:content>Группа управление</v8:content>
 						</v8:item>
 					</ToolTip>
-					<Picture>
-						<xr:Ref>CommonPicture.РазделАдминистрирование48</xr:Ref>
-						<xr:LoadTransparent>true</xr:LoadTransparent>
-					</Picture>
 					<ExtendedTooltip name="ГруппаУправлениеРасширеннаяПодсказка" id="4"/>
 					<ChildItems>
 						<UsualGroup name="ГруппаНастройки" id="134">
@@ -272,12 +268,6 @@
 				<v8:Type>cfg:ExternalDataProcessorObject.INTEGRATION_TOOLS_RM</v8:Type>
 			</Type>
 			<MainAttribute>true</MainAttribute>
-			<Save>
-				<Field>1/0:3b997d3a-ed75-4b41-8bbf-8bd1098fe9a0</Field>
-				<Field>1/0:ed4a841d-733b-48ad-8855-9b7082a271f3</Field>
-				<Field>1/0:f045b8e5-217b-498f-80ee-d83c51cae1eb/1</Field>
-				<Field>1/0:f045b8e5-217b-498f-80ee-d83c51cae1eb/2</Field>
-			</Save>
 		</Attribute>
 		<Attribute name="ВыполнитьОтчет" id="2">
 			<Title>
