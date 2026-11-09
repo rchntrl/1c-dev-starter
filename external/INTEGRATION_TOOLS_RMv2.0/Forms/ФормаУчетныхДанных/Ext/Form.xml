@@ -15,14 +15,7 @@
 	<Events>
 		<Event name="OnCreateAtServer">ПриСозданииНаСервере</Event>
 	</Events>
-	<ChildItems>
-		<UsualGroup name="ГруппаПоля" id="3">
-			<Group>Vertical</Group>
-			<Representation>None</Representation>
-			<ShowTitle>false</ShowTitle>
-			<ExtendedTooltip name="ГруппаПоляРасширеннаяПодсказка" id="4"/>
-		</UsualGroup>
-	</ChildItems>
+	<ChildItems/>
 	<Attributes>
 		<Attribute name="Объект" id="1">
 			<Type>
@@ -30,11 +23,11 @@
 			</Type>
 			<MainAttribute>true</MainAttribute>
 		</Attribute>
-		<Attribute name="Идентификатор" id="2">
+		<Attribute name="Идентификаторы" id="2">
 			<Title>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Идентификатор</v8:content>
+					<v8:content>Идентификаторы</v8:content>
 				</v8:item>
 			</Title>
 			<Type>
