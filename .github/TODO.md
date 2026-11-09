@@ -42,12 +42,6 @@
 ## Стиль (см. [bsl-code-style.md](../.claude/rules/bsl-code-style.md) и
 [external-code-style.md](../.claude/rules/external-code-style.md))
 
-- [ ] `GetRecordSet`, `FillDataSetFromRecordSet` (область `SQLDataMapping`) — английские имена вне
-      HTTP/JSON-слоя: `external-code-style.md` разрешает английские имена только для HTTP/JSON-примитивов
-      и их прямых помощников (`getJSONQuery`, `postJSONQuery`, `wrapfor`, `IsDataGotten`, `IsDataPosted` —
-      это и их прямые помощники вроде `FollowRelatedLink`, `GetUnixTimeDecodeParams` уже соответствуют
-      правилу и переименования не требуют). ADO/SQL-обёртки под это исключение не попадают — переименовать
-      в русские аналоги.
 - [ ] `GetMapProperty` (область `JSONHelper`) и его параметры `obj`, `path`, `failure`, `breadcrumbs` —
       не низкоуровневый HTTP/JSON-примитив, а универсальный обход `Соответствие` по пути; решить,
       переименовать по-русски или признать помощником JSON-слоя и оставить.
