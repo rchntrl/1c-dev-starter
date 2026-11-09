@@ -63,12 +63,12 @@
   ```powershell
   git switch main
   git pull --ff-only
-  git switch -c extensions/MyExtension
+  git switch -c extension/MyExtension
   # в .gitignore: !extensions/MyExtension/
   git add .gitignore extensions/MyExtension
   git commit -m "Обновить расширение MyExtension"
-  git tag -a extensions/MyExtension/1.0 -m "MyExtension 1.0"
-  git push origin extensions/MyExtension extensions/MyExtension/1.0
+  git tag -a extension/MyExtension/1.0 -m "MyExtension 1.0"
+  git push origin extension/MyExtension extension/MyExtension/1.0
   ```
 
   Ветка остаётся отдельной от `main` и в неё не вливается. Каждый выпуск
@@ -86,36 +86,33 @@
 
 ## Сценарии сборки
 
-- `.build/build-cf.ps1` / `.build/build-cf.bat` — сборка `.cf` из XML-выгрузки в `conf`;
-- `.build/build-cfe.ps1` / `.build/build-cfe.bat` — сборка расширения из `extensions`;
-- `.build/build-ep.ps1` / `.build/build-ep.bat` — сборка внешней обработки (`.epf`) или внешнего отчёта (`.erf`) из XML-выгрузки в `external`.
+- `.build/build-cf.ps1` — сборка `.cf` из XML-выгрузки в `conf`;
+- `.build/build-cfe.ps1` — сборка расширения из `extensions`;
+- `.build/build-ep.ps1` — сборка внешней обработки (`.epf`) или внешнего отчёта (`.erf`) из XML-выгрузки в `external`.
 
 ### Как читать команды сборки
 
-Оба варианта запускаются из корня репозитория. Для PowerShell используйте
-`.ps1`, для командной строки Windows — `.bat`. Аргументы указываются в одном
-порядке: имя исходного артефакта, затем (необязательно) версия платформы.
+Сценарии запускаются из корня репозитория в PowerShell. Аргументы указываются
+в одном порядке: имя исходного артефакта, затем (необязательно) версия
+платформы.
 
 ```powershell
 .\.build\build-ep.ps1 MyProcessor
-.\.build\build-ep.bat MyProcessor
 ```
 
 Здесь:
 
-- `build-ep.ps1` и `build-ep.bat` — сценарии сборки внешней обработки или отчёта;
+- `build-ep.ps1` — сценарий сборки внешней обработки или отчёта;
 - `MyProcessor` — имя исходного XML-файла без расширения `.xml`;
 - сценарий ищет файл `external\MyProcessor.xml`;
 - финальный артефакт сохраняется в корне проекта как `MyProcessor_YYYY-MM-DD.epf`
   (для внешнего отчёта — `.erf`, тип определяется по корневому элементу выгрузки).
 
-Для конфигурации и расширения также можно выбрать любой вариант:
+Для конфигурации и расширения:
 
 ```powershell
 .\.build\build-cf.ps1 1Cv8 8.3.24.1691
-.\.build\build-cf.bat 1Cv8 8.3.24.1691
 .\.build\build-cfe.ps1 GS 8.3.24.1691
-.\.build\build-cfe.bat GS 8.3.24.1691
 ```
 
 Имена и версии можно передать аргументами; версии по умолчанию указаны в
