@@ -393,6 +393,8 @@
 			<Template>EmptySample</Template>
 			<Template>SQL_TABLE_SIZES</Template>
 			<Template>CBR_RATES</Template>
+			<Template>HTTP_IP_INFO</Template>
+			<Template>HTTP_WEATHER</Template>
 		</ChildObjects>
 	</ExternalDataProcessor>
 </MetaDataObject>

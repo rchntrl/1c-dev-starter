@@ -195,88 +195,170 @@
 					</ToolTip>
 					<ExtendedTooltip name="ГруппаВизуализацияРасширеннаяПодсказка" id="6"/>
 					<ChildItems>
-						<RadioButtonField name="ВыполнитьОтчет" id="32">
-							<DataPath>ВыполнитьОтчет</DataPath>
-							<SkipOnInput>true</SkipOnInput>
-							<TitleLocation>None</TitleLocation>
-							<RadioButtonType>Tumbler</RadioButtonType>
-							<ChoiceList>
-								<xr:Item>
-									<xr:Presentation/>
-									<xr:CheckState>0</xr:CheckState>
-									<xr:Value xsi:type="FormChoiceListDesTimeValue">
-										<Presentation>
-											<v8:item>
-												<v8:lang>ru</v8:lang>
-												<v8:content>Соединения SQL (sp_who2)</v8:content>
-											</v8:item>
-											<v8:item>
-												<v8:lang>en</v8:lang>
-												<v8:content>SQL connections (sp_who2)</v8:content>
-											</v8:item>
-										</Presentation>
-										<Value xsi:type="xs:string">SQL_TEST</Value>
-									</xr:Value>
-								</xr:Item>
-								<xr:Item>
-									<xr:Presentation/>
-									<xr:CheckState>0</xr:CheckState>
-									<xr:Value xsi:type="FormChoiceListDesTimeValue">
-										<Presentation>
-											<v8:item>
-												<v8:lang>ru</v8:lang>
-												<v8:content>Блокировки SQL (sp_lock)</v8:content>
-											</v8:item>
-											<v8:item>
-												<v8:lang>en</v8:lang>
-												<v8:content>SQL locks (sp_lock)</v8:content>
-											</v8:item>
-										</Presentation>
-										<Value xsi:type="xs:string">SQL_LOCK_TEST</Value>
-									</xr:Value>
-								</xr:Item>
-								<xr:Item>
-									<xr:Presentation/>
-									<xr:CheckState>0</xr:CheckState>
-									<xr:Value xsi:type="FormChoiceListDesTimeValue">
-										<Presentation>
-											<v8:item>
-												<v8:lang>ru</v8:lang>
-												<v8:content>Размер таблиц и индексов SQL</v8:content>
-											</v8:item>
-											<v8:item>
-												<v8:lang>en</v8:lang>
-												<v8:content>SQL table and index sizes</v8:content>
-											</v8:item>
-										</Presentation>
-										<Value xsi:type="xs:string">SQL_TABLE_SIZES</Value>
-									</xr:Value>
-								</xr:Item>
-								<xr:Item>
-									<xr:Presentation/>
-									<xr:CheckState>0</xr:CheckState>
-									<xr:Value xsi:type="FormChoiceListDesTimeValue">
-										<Presentation>
-											<v8:item>
-												<v8:lang>ru</v8:lang>
-												<v8:content>Курсы валют ЦБ РФ</v8:content>
-											</v8:item>
-											<v8:item>
-												<v8:lang>en</v8:lang>
-												<v8:content>CBR exchange rates</v8:content>
-											</v8:item>
-										</Presentation>
-										<Value xsi:type="xs:string">CBR_RATES</Value>
-									</xr:Value>
-								</xr:Item>
-							</ChoiceList>
-							<Font bold="true" kind="AutoFont"/>
-							<ContextMenu name="ВыполнитьОтчетКонтекстноеМеню" id="33"/>
-							<ExtendedTooltip name="ВыполнитьОтчетРасширеннаяПодсказка" id="34"/>
-							<Events>
-								<Event name="OnChange">ОтчетПриИзменении</Event>
-							</Events>
-						</RadioButtonField>
+						<UsualGroup name="ГруппаТипОтчета" id="300">
+							<Group>AlwaysHorizontal</Group>
+							<Representation>None</Representation>
+							<ShowTitle>false</ShowTitle>
+							<ExtendedTooltip name="ГруппаТипОтчетаРасширеннаяПодсказка" id="301"/>
+							<ChildItems>
+								<UsualGroup name="ГруппаSQL" id="302">
+									<Title>
+										<v8:item>
+											<v8:lang>ru</v8:lang>
+											<v8:content>SQL</v8:content>
+										</v8:item>
+									</Title>
+									<Group>Vertical</Group>
+									<Representation>WeakSeparation</Representation>
+									<ExtendedTooltip name="ГруппаSQLРасширеннаяПодсказка" id="303"/>
+									<ChildItems>
+										<RadioButtonField name="ВыполнитьОтчетSQL" id="304">
+											<DataPath>ВыполнитьОтчет</DataPath>
+											<SkipOnInput>true</SkipOnInput>
+											<TitleLocation>None</TitleLocation>
+											<RadioButtonType>Tumbler</RadioButtonType>
+											<ChoiceList>
+												<xr:Item>
+													<xr:Presentation/>
+													<xr:CheckState>0</xr:CheckState>
+													<xr:Value xsi:type="FormChoiceListDesTimeValue">
+														<Presentation>
+															<v8:item>
+																<v8:lang>ru</v8:lang>
+																<v8:content>Соединения SQL (sp_who2)</v8:content>
+															</v8:item>
+															<v8:item>
+																<v8:lang>en</v8:lang>
+																<v8:content>SQL connections (sp_who2)</v8:content>
+															</v8:item>
+														</Presentation>
+														<Value xsi:type="xs:string">SQL_TEST</Value>
+													</xr:Value>
+												</xr:Item>
+												<xr:Item>
+													<xr:Presentation/>
+													<xr:CheckState>0</xr:CheckState>
+													<xr:Value xsi:type="FormChoiceListDesTimeValue">
+														<Presentation>
+															<v8:item>
+																<v8:lang>ru</v8:lang>
+																<v8:content>Блокировки SQL (sp_lock)</v8:content>
+															</v8:item>
+															<v8:item>
+																<v8:lang>en</v8:lang>
+																<v8:content>SQL locks (sp_lock)</v8:content>
+															</v8:item>
+														</Presentation>
+														<Value xsi:type="xs:string">SQL_LOCK_TEST</Value>
+													</xr:Value>
+												</xr:Item>
+												<xr:Item>
+													<xr:Presentation/>
+													<xr:CheckState>0</xr:CheckState>
+													<xr:Value xsi:type="FormChoiceListDesTimeValue">
+														<Presentation>
+															<v8:item>
+																<v8:lang>ru</v8:lang>
+																<v8:content>Размер таблиц и индексов SQL</v8:content>
+															</v8:item>
+															<v8:item>
+																<v8:lang>en</v8:lang>
+																<v8:content>SQL table and index sizes</v8:content>
+															</v8:item>
+														</Presentation>
+														<Value xsi:type="xs:string">SQL_TABLE_SIZES</Value>
+													</xr:Value>
+												</xr:Item>
+											</ChoiceList>
+											<Font bold="true" kind="AutoFont"/>
+											<ContextMenu name="ВыполнитьОтчетSQLКонтекстноеМеню" id="305"/>
+											<ExtendedTooltip name="ВыполнитьОтчетSQLРасширеннаяПодсказка" id="306"/>
+											<Events>
+												<Event name="OnChange">ОтчетПриИзменении</Event>
+											</Events>
+										</RadioButtonField>
+									</ChildItems>
+								</UsualGroup>
+								<UsualGroup name="ГруппаHTTP" id="307">
+									<Title>
+										<v8:item>
+											<v8:lang>ru</v8:lang>
+											<v8:content>HTTP</v8:content>
+										</v8:item>
+									</Title>
+									<Group>Vertical</Group>
+									<Representation>WeakSeparation</Representation>
+									<ExtendedTooltip name="ГруппаHTTPРасширеннаяПодсказка" id="308"/>
+									<ChildItems>
+										<RadioButtonField name="ВыполнитьОтчетHTTP" id="309">
+											<DataPath>ВыполнитьОтчет</DataPath>
+											<SkipOnInput>true</SkipOnInput>
+											<TitleLocation>None</TitleLocation>
+											<RadioButtonType>Tumbler</RadioButtonType>
+											<ChoiceList>
+												<xr:Item>
+													<xr:Presentation/>
+													<xr:CheckState>0</xr:CheckState>
+													<xr:Value xsi:type="FormChoiceListDesTimeValue">
+														<Presentation>
+															<v8:item>
+																<v8:lang>ru</v8:lang>
+																<v8:content>Курсы валют ЦБ РФ</v8:content>
+															</v8:item>
+															<v8:item>
+																<v8:lang>en</v8:lang>
+																<v8:content>CBR exchange rates</v8:content>
+															</v8:item>
+														</Presentation>
+														<Value xsi:type="xs:string">CBR_RATES</Value>
+													</xr:Value>
+												</xr:Item>
+												<xr:Item>
+													<xr:Presentation/>
+													<xr:CheckState>0</xr:CheckState>
+													<xr:Value xsi:type="FormChoiceListDesTimeValue">
+														<Presentation>
+															<v8:item>
+																<v8:lang>ru</v8:lang>
+																<v8:content>Информация об IP (ipapi.co)</v8:content>
+															</v8:item>
+															<v8:item>
+																<v8:lang>en</v8:lang>
+																<v8:content>IP info (ipapi.co)</v8:content>
+															</v8:item>
+														</Presentation>
+														<Value xsi:type="xs:string">HTTP_IP_INFO</Value>
+													</xr:Value>
+												</xr:Item>
+												<xr:Item>
+													<xr:Presentation/>
+													<xr:CheckState>0</xr:CheckState>
+													<xr:Value xsi:type="FormChoiceListDesTimeValue">
+														<Presentation>
+															<v8:item>
+																<v8:lang>ru</v8:lang>
+																<v8:content>Погода по IP (Open-Meteo)</v8:content>
+															</v8:item>
+															<v8:item>
+																<v8:lang>en</v8:lang>
+																<v8:content>Weather by IP (Open-Meteo)</v8:content>
+															</v8:item>
+														</Presentation>
+														<Value xsi:type="xs:string">HTTP_WEATHER</Value>
+													</xr:Value>
+												</xr:Item>
+											</ChoiceList>
+											<Font bold="true" kind="AutoFont"/>
+											<ContextMenu name="ВыполнитьОтчетHTTPКонтекстноеМеню" id="310"/>
+											<ExtendedTooltip name="ВыполнитьОтчетHTTPРасширеннаяПодсказка" id="311"/>
+											<Events>
+												<Event name="OnChange">ОтчетПриИзменении</Event>
+											</Events>
+										</RadioButtonField>
+									</ChildItems>
+								</UsualGroup>
+							</ChildItems>
+						</UsualGroup>
 						<SpreadSheetDocumentField name="Визуализация" id="13">
 							<DataPath>Объект.Визуализация</DataPath>
 							<TitleLocation>None</TitleLocation>
