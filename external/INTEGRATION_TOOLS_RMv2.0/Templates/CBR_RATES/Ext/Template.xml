@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <DataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcscom="http://v8.1c.ru/8.1/data-composition-system/common" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<dataSource>
 		<name>ИсточникДанных1</name>
@@ -7,8 +7,8 @@
 	<dataSet xsi:type="DataSetObject">
 		<name>CBR</name>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>Код</dataPath>
-			<field>Код</field>
+			<dataPath>CharCode</dataPath>
+			<field>CharCode</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -24,8 +24,8 @@
 			</valueType>
 		</field>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>Название</dataPath>
-			<field>Название</field>
+			<dataPath>Name</dataPath>
+			<field>Name</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -41,8 +41,8 @@
 			</valueType>
 		</field>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>Номинал</dataPath>
-			<field>Номинал</field>
+			<dataPath>Nominal</dataPath>
+			<field>Nominal</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -59,8 +59,8 @@
 			</valueType>
 		</field>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>Курс</dataPath>
-			<field>Курс</field>
+			<dataPath>Value</dataPath>
+			<field>Value</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -77,8 +77,8 @@
 			</valueType>
 		</field>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>КурсПредыдущий</dataPath>
-			<field>КурсПредыдущий</field>
+			<dataPath>Previous</dataPath>
+			<field>Previous</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -94,6 +94,16 @@
 				</v8:NumberQualifiers>
 			</valueType>
 		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>КлючСвязиОбъекта</dataPath>
+			<field>КлючСвязиОбъекта</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Ключ связи объекта</v8:content>
+				</v8:item>
+			</title>
+		</field>
 		<dataSource>ИсточникДанных1</dataSource>
 		<objectName>CBR</objectName>
 	</dataSet>
@@ -103,19 +113,19 @@
 		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">
 			<dcsset:selection>
 				<dcsset:item xsi:type="dcsset:SelectedItemField">
-					<dcsset:field>Код</dcsset:field>
+					<dcsset:field>CharCode</dcsset:field>
 				</dcsset:item>
 				<dcsset:item xsi:type="dcsset:SelectedItemField">
-					<dcsset:field>Название</dcsset:field>
+					<dcsset:field>Name</dcsset:field>
 				</dcsset:item>
 				<dcsset:item xsi:type="dcsset:SelectedItemField">
-					<dcsset:field>Номинал</dcsset:field>
+					<dcsset:field>Nominal</dcsset:field>
 				</dcsset:item>
 				<dcsset:item xsi:type="dcsset:SelectedItemField">
-					<dcsset:field>Курс</dcsset:field>
+					<dcsset:field>Value</dcsset:field>
 				</dcsset:item>
 				<dcsset:item xsi:type="dcsset:SelectedItemField">
-					<dcsset:field>КурсПредыдущий</dcsset:field>
+					<dcsset:field>Previous</dcsset:field>
 				</dcsset:item>
 			</dcsset:selection>
 			<dcsset:conditionalAppearance>
@@ -212,7 +222,7 @@
 			<dcsset:item xsi:type="dcsset:StructureItemGroup">
 				<dcsset:order>
 					<dcsset:item xsi:type="dcsset:OrderItemField">
-						<dcsset:field>Код</dcsset:field>
+						<dcsset:field>CharCode</dcsset:field>
 						<dcsset:orderType>Asc</dcsset:orderType>
 					</dcsset:item>
 				</dcsset:order>

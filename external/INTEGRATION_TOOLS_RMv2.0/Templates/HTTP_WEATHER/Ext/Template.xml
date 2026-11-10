@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <DataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcscom="http://v8.1c.ru/8.1/data-composition-system/common" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<dataSource>
 		<name>ИсточникДанных1</name>
@@ -7,8 +7,8 @@
 	<dataSet xsi:type="DataSetObject">
 		<name>HTTP</name>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>Дата</dataPath>
-			<field>Дата</field>
+			<dataPath>time</dataPath>
+			<field>time</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -23,8 +23,8 @@
 			</valueType>
 		</field>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>ТемператураМин</dataPath>
-			<field>ТемператураМин</field>
+			<dataPath>temperature_2m_min</dataPath>
+			<field>temperature_2m_min</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -41,8 +41,8 @@
 			</valueType>
 		</field>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>ТемператураМакс</dataPath>
-			<field>ТемператураМакс</field>
+			<dataPath>temperature_2m_max</dataPath>
+			<field>temperature_2m_max</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -59,8 +59,8 @@
 			</valueType>
 		</field>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>Осадки</dataPath>
-			<field>Осадки</field>
+			<dataPath>precipitation_sum</dataPath>
+			<field>precipitation_sum</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -76,6 +76,19 @@
 				</v8:NumberQualifiers>
 			</valueType>
 		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>КлючСвязиОбъекта</dataPath>
+			<field>КлючСвязиОбъекта</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Ключ связи объекта</v8:content>
+				</v8:item>
+			</title>
+			<valueType>
+				<v8:Type>v8:UUID</v8:Type>
+			</valueType>
+		</field>
 		<dataSource>ИсточникДанных1</dataSource>
 		<objectName>HTTP</objectName>
 	</dataSet>
@@ -85,16 +98,16 @@
 		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">
 			<dcsset:selection>
 				<dcsset:item xsi:type="dcsset:SelectedItemField">
-					<dcsset:field>Дата</dcsset:field>
+					<dcsset:field>time</dcsset:field>
 				</dcsset:item>
 				<dcsset:item xsi:type="dcsset:SelectedItemField">
-					<dcsset:field>ТемператураМин</dcsset:field>
+					<dcsset:field>temperature_2m_min</dcsset:field>
 				</dcsset:item>
 				<dcsset:item xsi:type="dcsset:SelectedItemField">
-					<dcsset:field>ТемператураМакс</dcsset:field>
+					<dcsset:field>temperature_2m_max</dcsset:field>
 				</dcsset:item>
 				<dcsset:item xsi:type="dcsset:SelectedItemField">
-					<dcsset:field>Осадки</dcsset:field>
+					<dcsset:field>precipitation_sum</dcsset:field>
 				</dcsset:item>
 			</dcsset:selection>
 			<dcsset:conditionalAppearance>
@@ -191,7 +204,7 @@
 			<dcsset:item xsi:type="dcsset:StructureItemGroup">
 				<dcsset:order>
 					<dcsset:item xsi:type="dcsset:OrderItemField">
-						<dcsset:field>Дата</dcsset:field>
+						<dcsset:field>time</dcsset:field>
 						<dcsset:orderType>Asc</dcsset:orderType>
 					</dcsset:item>
 				</dcsset:order>
