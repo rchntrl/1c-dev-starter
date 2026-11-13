@@ -375,6 +375,19 @@
 														<Value xsi:type="xs:string">SELECT</Value>
 													</xr:Value>
 												</xr:Item>
+												<xr:Item>
+													<xr:Presentation/>
+													<xr:CheckState>0</xr:CheckState>
+													<xr:Value xsi:type="FormChoiceListDesTimeValue">
+														<Presentation>
+															<v8:item>
+																<v8:lang>ru</v8:lang>
+																<v8:content>Запрос 1С</v8:content>
+															</v8:item>
+														</Presentation>
+														<Value xsi:type="xs:string">QUERY1C</Value>
+													</xr:Value>
+												</xr:Item>
 											</ChoiceList>
 											<ContextMenu name="ВидЗапросаКонтекстноеМеню" id="224"/>
 											<ExtendedTooltip name="ВидЗапросаРасширеннаяПодсказка" id="225"/>
