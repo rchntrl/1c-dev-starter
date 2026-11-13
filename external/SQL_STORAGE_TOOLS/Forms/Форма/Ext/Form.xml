@@ -1136,6 +1136,21 @@
 							<ShowTitle>false</ShowTitle>
 							<ExtendedTooltip name="ГруппаКомандыПакетаРасширеннаяПодсказка" id="383"/>
 							<ChildItems>
+								<Button name="ОткрытьПакет" id="391">
+									<Type>UsualButton</Type>
+									<CommandName>Form.Command.ОткрытьПакет</CommandName>
+									<ExtendedTooltip name="ОткрытьПакетРасширеннаяПодсказка" id="392"/>
+								</Button>
+								<Button name="ЗаписатьПакет" id="393">
+									<Type>UsualButton</Type>
+									<CommandName>Form.Command.ЗаписатьПакет</CommandName>
+									<ExtendedTooltip name="ЗаписатьПакетРасширеннаяПодсказка" id="394"/>
+								</Button>
+								<Button name="УдалитьПакет" id="395">
+									<Type>UsualButton</Type>
+									<CommandName>Form.Command.УдалитьПакет</CommandName>
+									<ExtendedTooltip name="УдалитьПакетРасширеннаяПодсказка" id="396"/>
+								</Button>
 								<Button name="УпаковатьПакет" id="384">
 									<Type>UsualButton</Type>
 									<CommandName>Form.Command.Упаковать</CommandName>
@@ -1364,6 +1379,79 @@
 				<xr:LoadTransparent>true</xr:LoadTransparent>
 			</Picture>
 			<Action>СохранитьПакет</Action>
+		</Command>
+		<Command name="ОткрытьПакет" id="14">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Открыть</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Open</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Открыть пакет из файла и показать его объекты на доске со сравнением с текущей базой</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Open a package from a file and show its objects on the board compared with the current infobase</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Picture>
+				<xr:Ref>StdPicture.OpenFile</xr:Ref>
+				<xr:LoadTransparent>true</xr:LoadTransparent>
+			</Picture>
+			<Action>ОткрытьПакет</Action>
+		</Command>
+		<Command name="ЗаписатьПакет" id="15">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Записать в базу</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Write to infobase</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Записать объекты пакета, показанного на доске, в текущую базу (режим загрузки)</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Write the objects of the package shown on the board to the current infobase (load mode)</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>ЗаписатьПакет</Action>
+		</Command>
+		<Command name="УдалитьПакет" id="16">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Удалить из базы</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Delete from infobase</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Пометить на удаление или удалить из текущей базы объекты пакета, показанного на доске</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Mark for deletion or delete from the current infobase the objects of the package shown on the board</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>УдалитьПакет</Action>
 		</Command>
 	</Commands>
 </Form>
