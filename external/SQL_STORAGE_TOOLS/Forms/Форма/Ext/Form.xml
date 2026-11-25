@@ -224,122 +224,24 @@
 										<InputField name="ОбъектыМетаданныхПолноеИмя" id="218">
 											<DataPath>Объект.ОбъектыМетаданных.ПолноеИмя</DataPath>
 											<EditMode>EnterOnInput</EditMode>
+											<Width>60</Width>
+											<HorizontalStretch>false</HorizontalStretch>
 											<ContextMenu name="ОбъектыМетаданныхПолноеИмяКонтекстноеМеню" id="219"/>
 											<ExtendedTooltip name="ОбъектыМетаданныхПолноеИмяРасширеннаяПодсказка" id="220"/>
 										</InputField>
+										<LabelField name="ОбъектыМетаданныхПустаяГрафа" id="439">
+											<DataPath>Объект.ОбъектыМетаданных.ПустаяГрафа</DataPath>
+											<ShowInHeader>false</ShowInHeader>
+											<Width>1</Width>
+											<AutoMaxWidth>false</AutoMaxWidth>
+											<HorizontalStretch>true</HorizontalStretch>
+											<ContextMenu name="ОбъектыМетаданныхПустаяГрафаКонтекстноеМеню" id="440"/>
+											<ExtendedTooltip name="ОбъектыМетаданныхПустаяГрафаРасширеннаяПодсказка" id="441"/>
+										</LabelField>
 									</ChildItems>
 								</Table>
 							</ChildItems>
 						</UsualGroup>
-					</ChildItems>
-				</Page>
-				<Page name="ГруппаВизуализация" id="5">
-					<Title>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Доска</v8:content>
-						</v8:item>
-					</Title>
-					<ToolTip>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Группа визуализация</v8:content>
-						</v8:item>
-					</ToolTip>
-					<ExtendedTooltip name="ГруппаВизуализацияРасширеннаяПодсказка" id="6"/>
-					<ChildItems>
-						<RadioButtonField name="ВыполнитьОтчет" id="32">
-							<DataPath>ВыполнитьОтчет</DataPath>
-							<SkipOnInput>true</SkipOnInput>
-							<TitleLocation>None</TitleLocation>
-							<RadioButtonType>Tumbler</RadioButtonType>
-							<ChoiceList>
-								<xr:Item>
-									<xr:Presentation/>
-									<xr:CheckState>0</xr:CheckState>
-									<xr:Value xsi:type="FormChoiceListDesTimeValue">
-										<Presentation>
-											<v8:item>
-												<v8:lang>ru</v8:lang>
-												<v8:content>Структура хранения</v8:content>
-											</v8:item>
-										</Presentation>
-										<Value xsi:type="xs:string">STORAGE_STRUCTURE</Value>
-									</xr:Value>
-								</xr:Item>
-								<xr:Item>
-									<xr:Presentation/>
-									<xr:CheckState>0</xr:CheckState>
-									<xr:Value xsi:type="FormChoiceListDesTimeValue">
-										<Presentation>
-											<v8:item>
-												<v8:lang>ru</v8:lang>
-												<v8:content>Объекты пакета</v8:content>
-											</v8:item>
-										</Presentation>
-										<Value xsi:type="xs:string">PACKAGE</Value>
-									</xr:Value>
-								</xr:Item>
-							</ChoiceList>
-							<Font bold="true" kind="AutoFont"/>
-							<ContextMenu name="ВыполнитьОтчетКонтекстноеМеню" id="33"/>
-							<ExtendedTooltip name="ВыполнитьОтчетРасширеннаяПодсказка" id="34"/>
-							<Events>
-								<Event name="OnChange">ОтчетПриИзменении</Event>
-							</Events>
-						</RadioButtonField>
-						<RadioButtonField name="РежимРасшифровки" id="400">
-							<DataPath>Объект.РежимРасшифровки</DataPath>
-							<TitleLocation>Left</TitleLocation>
-							<RadioButtonType>Tumbler</RadioButtonType>
-							<ChoiceList>
-								<xr:Item>
-									<xr:Presentation/>
-									<xr:CheckState>0</xr:CheckState>
-									<xr:Value xsi:type="FormChoiceListDesTimeValue">
-										<Presentation>
-											<v8:item>
-												<v8:lang>ru</v8:lang>
-												<v8:content>Основной</v8:content>
-											</v8:item>
-											<v8:item>
-												<v8:lang>en</v8:lang>
-												<v8:content>Regular</v8:content>
-											</v8:item>
-										</Presentation>
-										<Value xsi:type="xs:string">Основной</Value>
-									</xr:Value>
-								</xr:Item>
-								<xr:Item>
-									<xr:Presentation/>
-									<xr:CheckState>0</xr:CheckState>
-									<xr:Value xsi:type="FormChoiceListDesTimeValue">
-										<Presentation>
-											<v8:item>
-												<v8:lang>ru</v8:lang>
-												<v8:content>Добавление в пакет</v8:content>
-											</v8:item>
-											<v8:item>
-												<v8:lang>en</v8:lang>
-												<v8:content>Add to package</v8:content>
-											</v8:item>
-										</Presentation>
-										<Value xsi:type="xs:string">ДобавлениеВПакет</Value>
-									</xr:Value>
-								</xr:Item>
-							</ChoiceList>
-							<ContextMenu name="РежимРасшифровкиКонтекстноеМеню" id="401"/>
-							<ExtendedTooltip name="РежимРасшифровкиРасширеннаяПодсказка" id="402"/>
-						</RadioButtonField>
-						<SpreadSheetDocumentField name="Визуализация" id="13">
-							<DataPath>Объект.Визуализация</DataPath>
-							<TitleLocation>None</TitleLocation>
-							<ContextMenu name="ВизуализацияКонтекстноеМеню" id="14"/>
-							<ExtendedTooltip name="ВизуализацияРасширеннаяПодсказка" id="15"/>
-							<Events>
-								<Event name="DetailProcessing">ВизуализацияОбработкаРасшифровки</Event>
-							</Events>
-						</SpreadSheetDocumentField>
 					</ChildItems>
 				</Page>
 				<Page name="ГруппаЗапрос" id="221">
@@ -607,6 +509,8 @@
 														<InputField name="ВыбранныеПоляИмяТаблицыХранения" id="377">
 															<DataPath>Объект.ВыбранныеПоля.ИмяТаблицыХранения</DataPath>
 															<EditMode>EnterOnInput</EditMode>
+															<Width>22</Width>
+															<HorizontalStretch>false</HorizontalStretch>
 															<ListChoiceMode>true</ListChoiceMode>
 															<ContextMenu name="ВыбранныеПоляИмяТаблицыХраненияКонтекстноеМеню" id="378"/>
 															<ExtendedTooltip name="ВыбранныеПоляИмяТаблицыХраненияРасширеннаяПодсказка" id="379"/>
@@ -614,16 +518,11 @@
 																<Event name="OnChange">ВыбранныеПоляИмяТаблицыХраненияПриИзменении</Event>
 															</Events>
 														</InputField>
-														<InputField name="ВыбранныеПоляПоле" id="368">
-															<DataPath>Объект.ВыбранныеПоля.Поле</DataPath>
-															<ReadOnly>true</ReadOnly>
-															<EditMode>EnterOnInput</EditMode>
-															<ContextMenu name="ВыбранныеПоляПолеКонтекстноеМеню" id="369"/>
-															<ExtendedTooltip name="ВыбранныеПоляПолеРасширеннаяПодсказка" id="370"/>
-														</InputField>
 														<InputField name="ВыбранныеПоляПолеХранения" id="371">
 															<DataPath>Объект.ВыбранныеПоля.ПолеХранения</DataPath>
 															<EditMode>EnterOnInput</EditMode>
+															<Width>22</Width>
+															<HorizontalStretch>false</HorizontalStretch>
 															<ListChoiceMode>true</ListChoiceMode>
 															<ContextMenu name="ВыбранныеПоляПолеХраненияКонтекстноеМеню" id="372"/>
 															<ExtendedTooltip name="ВыбранныеПоляПолеХраненияРасширеннаяПодсказка" id="373"/>
@@ -631,6 +530,24 @@
 																<Event name="OnChange">ВыбранныеПоляПолеХраненияПриИзменении</Event>
 															</Events>
 														</InputField>
+														<InputField name="ВыбранныеПоляПоле" id="368">
+															<DataPath>Объект.ВыбранныеПоля.Поле</DataPath>
+															<ReadOnly>true</ReadOnly>
+															<EditMode>EnterOnInput</EditMode>
+															<Width>35</Width>
+															<HorizontalStretch>false</HorizontalStretch>
+															<ContextMenu name="ВыбранныеПоляПолеКонтекстноеМеню" id="369"/>
+															<ExtendedTooltip name="ВыбранныеПоляПолеРасширеннаяПодсказка" id="370"/>
+														</InputField>
+														<LabelField name="ВыбранныеПоляПустаяГрафа" id="442">
+															<DataPath>Объект.ВыбранныеПоля.ПустаяГрафа</DataPath>
+															<ShowInHeader>false</ShowInHeader>
+															<Width>1</Width>
+															<AutoMaxWidth>false</AutoMaxWidth>
+															<HorizontalStretch>true</HorizontalStretch>
+															<ContextMenu name="ВыбранныеПоляПустаяГрафаКонтекстноеМеню" id="443"/>
+															<ExtendedTooltip name="ВыбранныеПоляПустаяГрафаРасширеннаяПодсказка" id="444"/>
+														</LabelField>
 													</ChildItems>
 												</Table>
 												<Table name="ОсновнойОтборЗапроса" id="226">
@@ -693,6 +610,8 @@
 														<InputField name="ОсновнойОтборЗапросаОбъектМетаданных" id="242">
 															<DataPath>Объект.ОсновнойОтборЗапроса.ОбъектМетаданных</DataPath>
 															<EditMode>EnterOnInput</EditMode>
+															<Width>28</Width>
+															<HorizontalStretch>false</HorizontalStretch>
 															<ListChoiceMode>true</ListChoiceMode>
 															<ContextMenu name="ОсновнойОтборЗапросаОбъектМетаданныхКонтекстноеМеню" id="243"/>
 															<ExtendedTooltip name="ОсновнойОтборЗапросаОбъектМетаданныхРасширеннаяПодсказка" id="244"/>
@@ -703,6 +622,8 @@
 														<InputField name="ОсновнойОтборЗапросаПолеХранения" id="248">
 															<DataPath>Объект.ОсновнойОтборЗапроса.ПолеХранения</DataPath>
 															<EditMode>EnterOnInput</EditMode>
+															<Width>18</Width>
+															<HorizontalStretch>false</HorizontalStretch>
 															<ListChoiceMode>true</ListChoiceMode>
 															<ContextMenu name="ОсновнойОтборЗапросаПолеХраненияКонтекстноеМеню" id="249"/>
 															<ExtendedTooltip name="ОсновнойОтборЗапросаПолеХраненияРасширеннаяПодсказка" id="250"/>
@@ -713,6 +634,8 @@
 														<InputField name="ОсновнойОтборЗапросаВидСравнения" id="251">
 															<DataPath>Объект.ОсновнойОтборЗапроса.ВидСравнения</DataPath>
 															<EditMode>EnterOnInput</EditMode>
+															<Width>12</Width>
+															<HorizontalStretch>false</HorizontalStretch>
 															<ListChoiceMode>true</ListChoiceMode>
 															<ChoiceList>
 																<xr:Item>
@@ -842,9 +765,20 @@
 														<InputField name="ОсновнойОтборЗапросаЗначение" id="254">
 															<DataPath>Объект.ОсновнойОтборЗапроса.Значение</DataPath>
 															<EditMode>EnterOnInput</EditMode>
+															<Width>26</Width>
+															<HorizontalStretch>false</HorizontalStretch>
 															<ContextMenu name="ОсновнойОтборЗапросаЗначениеКонтекстноеМеню" id="255"/>
 															<ExtendedTooltip name="ОсновнойОтборЗапросаЗначениеРасширеннаяПодсказка" id="256"/>
 														</InputField>
+														<LabelField name="ОсновнойОтборЗапросаПустаяГрафа" id="445">
+															<DataPath>Объект.ОсновнойОтборЗапроса.ПустаяГрафа</DataPath>
+															<ShowInHeader>false</ShowInHeader>
+															<Width>1</Width>
+															<AutoMaxWidth>false</AutoMaxWidth>
+															<HorizontalStretch>true</HorizontalStretch>
+															<ContextMenu name="ОсновнойОтборЗапросаПустаяГрафаКонтекстноеМеню" id="446"/>
+															<ExtendedTooltip name="ОсновнойОтборЗапросаПустаяГрафаРасширеннаяПодсказка" id="447"/>
+														</LabelField>
 													</ChildItems>
 												</Table>
 											</ChildItems>
@@ -922,6 +856,8 @@
 														<InputField name="СоединенияВидСоединения" id="286">
 															<DataPath>Объект.Соединения.ВидСоединения</DataPath>
 															<EditMode>EnterOnInput</EditMode>
+															<Width>13</Width>
+															<HorizontalStretch>false</HorizontalStretch>
 															<ListChoiceMode>true</ListChoiceMode>
 															<ChoiceList>
 																<xr:Item>
@@ -957,6 +893,8 @@
 														<InputField name="СоединенияИмяТаблицыХранения" id="289">
 															<DataPath>Объект.Соединения.ИмяТаблицыХранения</DataPath>
 															<EditMode>EnterOnInput</EditMode>
+															<Width>20</Width>
+															<HorizontalStretch>false</HorizontalStretch>
 															<ListChoiceMode>true</ListChoiceMode>
 															<ContextMenu name="СоединенияИмяТаблицыХраненияКонтекстноеМеню" id="290"/>
 															<ExtendedTooltip name="СоединенияИмяТаблицыХраненияРасширеннаяПодсказка" id="291"/>
@@ -967,6 +905,8 @@
 														<InputField name="СоединенияПолеГлавнойТаблицы" id="292">
 															<DataPath>Объект.Соединения.ПолеГлавнойТаблицы</DataPath>
 															<EditMode>EnterOnInput</EditMode>
+															<Width>20</Width>
+															<HorizontalStretch>false</HorizontalStretch>
 															<ListChoiceMode>true</ListChoiceMode>
 															<ContextMenu name="СоединенияПолеГлавнойТаблицыКонтекстноеМеню" id="293"/>
 															<ExtendedTooltip name="СоединенияПолеГлавнойТаблицыРасширеннаяПодсказка" id="294"/>
@@ -974,10 +914,21 @@
 														<InputField name="СоединенияПолеСоединяемойТаблицы" id="295">
 															<DataPath>Объект.Соединения.ПолеСоединяемойТаблицы</DataPath>
 															<EditMode>EnterOnInput</EditMode>
+															<Width>24</Width>
+															<HorizontalStretch>false</HorizontalStretch>
 															<ListChoiceMode>true</ListChoiceMode>
 															<ContextMenu name="СоединенияПолеСоединяемойТаблицыКонтекстноеМеню" id="296"/>
 															<ExtendedTooltip name="СоединенияПолеСоединяемойТаблицыРасширеннаяПодсказка" id="297"/>
 														</InputField>
+														<LabelField name="СоединенияПустаяГрафа" id="448">
+															<DataPath>Объект.Соединения.ПустаяГрафа</DataPath>
+															<ShowInHeader>false</ShowInHeader>
+															<Width>1</Width>
+															<AutoMaxWidth>false</AutoMaxWidth>
+															<HorizontalStretch>true</HorizontalStretch>
+															<ContextMenu name="СоединенияПустаяГрафаКонтекстноеМеню" id="449"/>
+															<ExtendedTooltip name="СоединенияПустаяГрафаРасширеннаяПодсказка" id="450"/>
+														</LabelField>
 													</ChildItems>
 												</Table>
 												<Table name="ОтборСоединений" id="300">
@@ -1040,6 +991,8 @@
 														<InputField name="ОтборСоединенийИмяТаблицыХранения" id="316">
 															<DataPath>Объект.ОтборСоединений.ИмяТаблицыХранения</DataPath>
 															<EditMode>EnterOnInput</EditMode>
+															<Width>20</Width>
+															<HorizontalStretch>false</HorizontalStretch>
 															<ListChoiceMode>true</ListChoiceMode>
 															<ContextMenu name="ОтборСоединенийИмяТаблицыХраненияКонтекстноеМеню" id="317"/>
 															<ExtendedTooltip name="ОтборСоединенийИмяТаблицыХраненияРасширеннаяПодсказка" id="318"/>
@@ -1050,6 +1003,8 @@
 														<InputField name="ОтборСоединенийПолеХранения" id="322">
 															<DataPath>Объект.ОтборСоединений.ПолеХранения</DataPath>
 															<EditMode>EnterOnInput</EditMode>
+															<Width>18</Width>
+															<HorizontalStretch>false</HorizontalStretch>
 															<ListChoiceMode>true</ListChoiceMode>
 															<ContextMenu name="ОтборСоединенийПолеХраненияКонтекстноеМеню" id="323"/>
 															<ExtendedTooltip name="ОтборСоединенийПолеХраненияРасширеннаяПодсказка" id="324"/>
@@ -1060,6 +1015,8 @@
 														<InputField name="ОтборСоединенийВидСравнения" id="325">
 															<DataPath>Объект.ОтборСоединений.ВидСравнения</DataPath>
 															<EditMode>EnterOnInput</EditMode>
+															<Width>12</Width>
+															<HorizontalStretch>false</HorizontalStretch>
 															<ListChoiceMode>true</ListChoiceMode>
 															<ChoiceList>
 																<xr:Item>
@@ -1147,9 +1104,20 @@
 														<InputField name="ОтборСоединенийЗначение" id="328">
 															<DataPath>Объект.ОтборСоединений.Значение</DataPath>
 															<EditMode>EnterOnInput</EditMode>
+															<Width>26</Width>
+															<HorizontalStretch>false</HorizontalStretch>
 															<ContextMenu name="ОтборСоединенийЗначениеКонтекстноеМеню" id="329"/>
 															<ExtendedTooltip name="ОтборСоединенийЗначениеРасширеннаяПодсказка" id="330"/>
 														</InputField>
+														<LabelField name="ОтборСоединенийПустаяГрафа" id="451">
+															<DataPath>Объект.ОтборСоединений.ПустаяГрафа</DataPath>
+															<ShowInHeader>false</ShowInHeader>
+															<Width>1</Width>
+															<AutoMaxWidth>false</AutoMaxWidth>
+															<HorizontalStretch>true</HorizontalStretch>
+															<ContextMenu name="ОтборСоединенийПустаяГрафаКонтекстноеМеню" id="452"/>
+															<ExtendedTooltip name="ОтборСоединенийПустаяГрафаРасширеннаяПодсказка" id="453"/>
+														</LabelField>
 													</ChildItems>
 												</Table>
 											</ChildItems>
@@ -1158,6 +1126,123 @@
 								</Pages>
 							</ChildItems>
 						</UsualGroup>
+					</ChildItems>
+				</Page>
+				<Page name="ГруппаВизуализация" id="5">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Доска</v8:content>
+						</v8:item>
+					</Title>
+					<ToolTip>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Группа визуализация</v8:content>
+						</v8:item>
+					</ToolTip>
+					<ExtendedTooltip name="ГруппаВизуализацияРасширеннаяПодсказка" id="6"/>
+					<ChildItems>
+						<UsualGroup name="ГруппаПараметрыДоски" id="428">
+							<Group>HorizontalIfPossible</Group>
+							<Representation>None</Representation>
+							<ShowTitle>false</ShowTitle>
+							<ExtendedTooltip name="ГруппаПараметрыДоскиРасширеннаяПодсказка" id="429"/>
+							<ChildItems>
+								<RadioButtonField name="ВыполнитьОтчет" id="32">
+									<DataPath>ВыполнитьОтчет</DataPath>
+									<SkipOnInput>true</SkipOnInput>
+									<TitleLocation>None</TitleLocation>
+									<RadioButtonType>Tumbler</RadioButtonType>
+									<ChoiceList>
+										<xr:Item>
+											<xr:Presentation/>
+											<xr:CheckState>0</xr:CheckState>
+											<xr:Value xsi:type="FormChoiceListDesTimeValue">
+												<Presentation>
+													<v8:item>
+														<v8:lang>ru</v8:lang>
+														<v8:content>Структура хранения</v8:content>
+													</v8:item>
+												</Presentation>
+												<Value xsi:type="xs:string">STORAGE_STRUCTURE</Value>
+											</xr:Value>
+										</xr:Item>
+										<xr:Item>
+											<xr:Presentation/>
+											<xr:CheckState>0</xr:CheckState>
+											<xr:Value xsi:type="FormChoiceListDesTimeValue">
+												<Presentation>
+													<v8:item>
+														<v8:lang>ru</v8:lang>
+														<v8:content>Объекты пакета</v8:content>
+													</v8:item>
+												</Presentation>
+												<Value xsi:type="xs:string">PACKAGE</Value>
+											</xr:Value>
+										</xr:Item>
+									</ChoiceList>
+									<Font bold="true" kind="AutoFont"/>
+									<ContextMenu name="ВыполнитьОтчетКонтекстноеМеню" id="33"/>
+									<ExtendedTooltip name="ВыполнитьОтчетРасширеннаяПодсказка" id="34"/>
+									<Events>
+										<Event name="OnChange">ОтчетПриИзменении</Event>
+									</Events>
+								</RadioButtonField>
+								<RadioButtonField name="РежимРасшифровки" id="400">
+									<DataPath>Объект.РежимРасшифровки</DataPath>
+									<TitleLocation>Left</TitleLocation>
+									<RadioButtonType>Tumbler</RadioButtonType>
+									<ChoiceList>
+										<xr:Item>
+											<xr:Presentation/>
+											<xr:CheckState>0</xr:CheckState>
+											<xr:Value xsi:type="FormChoiceListDesTimeValue">
+												<Presentation>
+													<v8:item>
+														<v8:lang>ru</v8:lang>
+														<v8:content>Основной</v8:content>
+													</v8:item>
+													<v8:item>
+														<v8:lang>en</v8:lang>
+														<v8:content>Regular</v8:content>
+													</v8:item>
+												</Presentation>
+												<Value xsi:type="xs:string">Основной</Value>
+											</xr:Value>
+										</xr:Item>
+										<xr:Item>
+											<xr:Presentation/>
+											<xr:CheckState>0</xr:CheckState>
+											<xr:Value xsi:type="FormChoiceListDesTimeValue">
+												<Presentation>
+													<v8:item>
+														<v8:lang>ru</v8:lang>
+														<v8:content>Добавление в пакет</v8:content>
+													</v8:item>
+													<v8:item>
+														<v8:lang>en</v8:lang>
+														<v8:content>Add to package</v8:content>
+													</v8:item>
+												</Presentation>
+												<Value xsi:type="xs:string">ДобавлениеВПакет</Value>
+											</xr:Value>
+										</xr:Item>
+									</ChoiceList>
+									<ContextMenu name="РежимРасшифровкиКонтекстноеМеню" id="401"/>
+									<ExtendedTooltip name="РежимРасшифровкиРасширеннаяПодсказка" id="402"/>
+								</RadioButtonField>
+							</ChildItems>
+						</UsualGroup>
+						<SpreadSheetDocumentField name="Визуализация" id="13">
+							<DataPath>Объект.Визуализация</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<ContextMenu name="ВизуализацияКонтекстноеМеню" id="14"/>
+							<ExtendedTooltip name="ВизуализацияРасширеннаяПодсказка" id="15"/>
+							<Events>
+								<Event name="DetailProcessing">ВизуализацияОбработкаРасшифровки</Event>
+							</Events>
+						</SpreadSheetDocumentField>
 					</ChildItems>
 				</Page>
 				<Page name="ГруппаПакет" id="380">
@@ -1174,98 +1259,135 @@
 					<ExtendedTooltip name="ГруппаПакетРасширеннаяПодсказка" id="381"/>
 					<ChildItems>
 						<UsualGroup name="ГруппаКомандыПакета" id="382">
-							<Group>AlwaysHorizontal</Group>
+							<Group>HorizontalIfPossible</Group>
 							<Representation>None</Representation>
 							<ShowTitle>false</ShowTitle>
 							<ExtendedTooltip name="ГруппаКомандыПакетаРасширеннаяПодсказка" id="383"/>
 							<ChildItems>
-								<Button name="ОткрытьПакет" id="391">
-									<Type>UsualButton</Type>
-									<CommandName>Form.Command.ОткрытьПакет</CommandName>
-									<ExtendedTooltip name="ОткрытьПакетРасширеннаяПодсказка" id="392"/>
-								</Button>
-								<Button name="ЗаписатьПакет" id="393">
-									<Type>UsualButton</Type>
-									<CommandName>Form.Command.ЗаписатьПакет</CommandName>
-									<ExtendedTooltip name="ЗаписатьПакетРасширеннаяПодсказка" id="394"/>
-								</Button>
-								<Button name="УдалитьПакет" id="395">
-									<Type>UsualButton</Type>
-									<CommandName>Form.Command.УдалитьПакет</CommandName>
-									<ExtendedTooltip name="УдалитьПакетРасширеннаяПодсказка" id="396"/>
-								</Button>
-								<Button name="УпаковатьПакет" id="384">
-									<Type>UsualButton</Type>
-									<CommandName>Form.Command.Упаковать</CommandName>
-									<ExtendedTooltip name="УпаковатьПакетРасширеннаяПодсказка" id="385"/>
-								</Button>
-								<Button name="СохранитьПакет" id="386">
-									<Type>UsualButton</Type>
-									<CommandName>Form.Command.СохранитьПакет</CommandName>
-									<ExtendedTooltip name="СохранитьПакетРасширеннаяПодсказка" id="387"/>
-								</Button>
+								<UsualGroup name="ГруппаУпаковкаПакета" id="430">
+									<Group>AlwaysHorizontal</Group>
+									<Representation>StrongSeparation</Representation>
+									<ShowTitle>false</ShowTitle>
+									<ExtendedTooltip name="ГруппаУпаковкаПакетаРасширеннаяПодсказка" id="431"/>
+									<ChildItems>
+										<RadioButtonField name="ФорматПакета" id="403">
+											<DataPath>Объект.ФорматПакета</DataPath>
+											<TitleLocation>Left</TitleLocation>
+											<RadioButtonType>Tumbler</RadioButtonType>
+											<ChoiceList>
+												<xr:Item>
+													<xr:Presentation/>
+													<xr:CheckState>0</xr:CheckState>
+													<xr:Value xsi:type="FormChoiceListDesTimeValue">
+														<Presentation>
+															<v8:item>
+																<v8:lang>ru</v8:lang>
+																<v8:content>Хранилище значения</v8:content>
+															</v8:item>
+															<v8:item>
+																<v8:lang>en</v8:lang>
+																<v8:content>Value storage</v8:content>
+															</v8:item>
+														</Presentation>
+														<Value xsi:type="xs:string">ХранилищеЗначения</Value>
+													</xr:Value>
+												</xr:Item>
+												<xr:Item>
+													<xr:Presentation/>
+													<xr:CheckState>0</xr:CheckState>
+													<xr:Value xsi:type="FormChoiceListDesTimeValue">
+														<Presentation>
+															<v8:item>
+																<v8:lang>ru</v8:lang>
+																<v8:content>XML</v8:content>
+															</v8:item>
+															<v8:item>
+																<v8:lang>en</v8:lang>
+																<v8:content>XML</v8:content>
+															</v8:item>
+														</Presentation>
+														<Value xsi:type="xs:string">XML</Value>
+													</xr:Value>
+												</xr:Item>
+												<xr:Item>
+													<xr:Presentation/>
+													<xr:CheckState>0</xr:CheckState>
+													<xr:Value xsi:type="FormChoiceListDesTimeValue">
+														<Presentation>
+															<v8:item>
+																<v8:lang>ru</v8:lang>
+																<v8:content>JSON</v8:content>
+															</v8:item>
+															<v8:item>
+																<v8:lang>en</v8:lang>
+																<v8:content>JSON</v8:content>
+															</v8:item>
+														</Presentation>
+														<Value xsi:type="xs:string">JSON</Value>
+													</xr:Value>
+												</xr:Item>
+											</ChoiceList>
+											<ContextMenu name="ФорматПакетаКонтекстноеМеню" id="404"/>
+											<ExtendedTooltip name="ФорматПакетаРасширеннаяПодсказка" id="405"/>
+											<Events>
+												<Event name="OnChange">ФорматПакетаПриИзменении</Event>
+											</Events>
+										</RadioButtonField>
+										<CheckBoxField name="ВключатьДвиженияПакета" id="436">
+											<DataPath>Объект.ВключатьДвижения</DataPath>
+											<TitleLocation>Right</TitleLocation>
+											<CheckBoxType>Auto</CheckBoxType>
+											<ContextMenu name="ВключатьДвиженияПакетаКонтекстноеМеню" id="437"/>
+											<ExtendedTooltip name="ВключатьДвиженияПакетаРасширеннаяПодсказка" id="438"/>
+											<Events>
+												<Event name="OnChange">ВключатьДвиженияПриИзменении</Event>
+											</Events>
+										</CheckBoxField>
+										<Button name="УпаковатьПакет" id="384">
+											<Type>UsualButton</Type>
+											<CommandName>Form.Command.Упаковать</CommandName>
+											<ExtendedTooltip name="УпаковатьПакетРасширеннаяПодсказка" id="385"/>
+										</Button>
+										<Button name="СохранитьПакет" id="386">
+											<Type>UsualButton</Type>
+											<CommandName>Form.Command.СохранитьПакет</CommandName>
+											<ExtendedTooltip name="СохранитьПакетРасширеннаяПодсказка" id="387"/>
+										</Button>
+									</ChildItems>
+								</UsualGroup>
+								<UsualGroup name="ГруппаЗагрузкаПакета" id="432">
+									<Group>AlwaysHorizontal</Group>
+									<Representation>StrongSeparation</Representation>
+									<ShowTitle>false</ShowTitle>
+									<ExtendedTooltip name="ГруппаЗагрузкаПакетаРасширеннаяПодсказка" id="433"/>
+									<ChildItems>
+										<Button name="ОткрытьПакет" id="391">
+											<Type>UsualButton</Type>
+											<CommandName>Form.Command.ОткрытьПакет</CommandName>
+											<ExtendedTooltip name="ОткрытьПакетРасширеннаяПодсказка" id="392"/>
+										</Button>
+										<Button name="ЗаписатьПакет" id="393">
+											<Type>UsualButton</Type>
+											<CommandName>Form.Command.ЗаписатьПакет</CommandName>
+											<ExtendedTooltip name="ЗаписатьПакетРасширеннаяПодсказка" id="394"/>
+										</Button>
+									</ChildItems>
+								</UsualGroup>
+								<UsualGroup name="ГруппаУдалениеПакета" id="434">
+									<Group>AlwaysHorizontal</Group>
+									<Representation>StrongSeparation</Representation>
+									<ShowTitle>false</ShowTitle>
+									<ExtendedTooltip name="ГруппаУдалениеПакетаРасширеннаяПодсказка" id="435"/>
+									<ChildItems>
+										<Button name="УдалитьПакет" id="395">
+											<Type>UsualButton</Type>
+											<CommandName>Form.Command.УдалитьПакет</CommandName>
+											<ExtendedTooltip name="УдалитьПакетРасширеннаяПодсказка" id="396"/>
+										</Button>
+									</ChildItems>
+								</UsualGroup>
 							</ChildItems>
 						</UsualGroup>
-						<RadioButtonField name="ФорматПакета" id="403">
-							<DataPath>Объект.ФорматПакета</DataPath>
-							<TitleLocation>Left</TitleLocation>
-							<RadioButtonType>Tumbler</RadioButtonType>
-							<ChoiceList>
-								<xr:Item>
-									<xr:Presentation/>
-									<xr:CheckState>0</xr:CheckState>
-									<xr:Value xsi:type="FormChoiceListDesTimeValue">
-										<Presentation>
-											<v8:item>
-												<v8:lang>ru</v8:lang>
-												<v8:content>Хранилище значения</v8:content>
-											</v8:item>
-											<v8:item>
-												<v8:lang>en</v8:lang>
-												<v8:content>Value storage</v8:content>
-											</v8:item>
-										</Presentation>
-										<Value xsi:type="xs:string">ХранилищеЗначения</Value>
-									</xr:Value>
-								</xr:Item>
-								<xr:Item>
-									<xr:Presentation/>
-									<xr:CheckState>0</xr:CheckState>
-									<xr:Value xsi:type="FormChoiceListDesTimeValue">
-										<Presentation>
-											<v8:item>
-												<v8:lang>ru</v8:lang>
-												<v8:content>XML</v8:content>
-											</v8:item>
-											<v8:item>
-												<v8:lang>en</v8:lang>
-												<v8:content>XML</v8:content>
-											</v8:item>
-										</Presentation>
-										<Value xsi:type="xs:string">XML</Value>
-									</xr:Value>
-								</xr:Item>
-								<xr:Item>
-									<xr:Presentation/>
-									<xr:CheckState>0</xr:CheckState>
-									<xr:Value xsi:type="FormChoiceListDesTimeValue">
-										<Presentation>
-											<v8:item>
-												<v8:lang>ru</v8:lang>
-												<v8:content>JSON</v8:content>
-											</v8:item>
-											<v8:item>
-												<v8:lang>en</v8:lang>
-												<v8:content>JSON</v8:content>
-											</v8:item>
-										</Presentation>
-										<Value xsi:type="xs:string">JSON</Value>
-									</xr:Value>
-								</xr:Item>
-							</ChoiceList>
-							<ContextMenu name="ФорматПакетаКонтекстноеМеню" id="404"/>
-							<ExtendedTooltip name="ФорматПакетаРасширеннаяПодсказка" id="405"/>
-						</RadioButtonField>
 						<UsualGroup name="ГруппаСодержимоеПакета" id="406">
 							<Group>AlwaysHorizontal</Group>
 							<Representation>None</Representation>
@@ -1361,6 +1483,63 @@
 				<Field>1/0:f045b8e5-217b-498f-80ee-d83c51cae1eb/1</Field>
 				<Field>1/0:f045b8e5-217b-498f-80ee-d83c51cae1eb/2</Field>
 			</Save>
+			<Columns>
+				<AdditionalColumns table="Объект.ОбъектыМетаданных">
+					<Column name="ПустаяГрафа" id="1">
+						<Type>
+							<v8:Type>xs:string</v8:Type>
+							<v8:StringQualifiers>
+								<v8:Length>0</v8:Length>
+								<v8:AllowedLength>Variable</v8:AllowedLength>
+							</v8:StringQualifiers>
+						</Type>
+					</Column>
+				</AdditionalColumns>
+				<AdditionalColumns table="Объект.ВыбранныеПоля">
+					<Column name="ПустаяГрафа" id="2">
+						<Type>
+							<v8:Type>xs:string</v8:Type>
+							<v8:StringQualifiers>
+								<v8:Length>0</v8:Length>
+								<v8:AllowedLength>Variable</v8:AllowedLength>
+							</v8:StringQualifiers>
+						</Type>
+					</Column>
+				</AdditionalColumns>
+				<AdditionalColumns table="Объект.ОсновнойОтборЗапроса">
+					<Column name="ПустаяГрафа" id="3">
+						<Type>
+							<v8:Type>xs:string</v8:Type>
+							<v8:StringQualifiers>
+								<v8:Length>0</v8:Length>
+								<v8:AllowedLength>Variable</v8:AllowedLength>
+							</v8:StringQualifiers>
+						</Type>
+					</Column>
+				</AdditionalColumns>
+				<AdditionalColumns table="Объект.Соединения">
+					<Column name="ПустаяГрафа" id="4">
+						<Type>
+							<v8:Type>xs:string</v8:Type>
+							<v8:StringQualifiers>
+								<v8:Length>0</v8:Length>
+								<v8:AllowedLength>Variable</v8:AllowedLength>
+							</v8:StringQualifiers>
+						</Type>
+					</Column>
+				</AdditionalColumns>
+				<AdditionalColumns table="Объект.ОтборСоединений">
+					<Column name="ПустаяГрафа" id="5">
+						<Type>
+							<v8:Type>xs:string</v8:Type>
+							<v8:StringQualifiers>
+								<v8:Length>0</v8:Length>
+								<v8:AllowedLength>Variable</v8:AllowedLength>
+							</v8:StringQualifiers>
+						</Type>
+					</Column>
+				</AdditionalColumns>
+			</Columns>
 		</Attribute>
 		<Attribute name="ВыполнитьОтчет" id="2">
 			<Title>
