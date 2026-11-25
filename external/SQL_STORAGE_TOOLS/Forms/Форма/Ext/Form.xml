@@ -288,6 +288,49 @@
 								<Event name="OnChange">ОтчетПриИзменении</Event>
 							</Events>
 						</RadioButtonField>
+						<RadioButtonField name="РежимРасшифровки" id="400">
+							<DataPath>Объект.РежимРасшифровки</DataPath>
+							<TitleLocation>Left</TitleLocation>
+							<RadioButtonType>Tumbler</RadioButtonType>
+							<ChoiceList>
+								<xr:Item>
+									<xr:Presentation/>
+									<xr:CheckState>0</xr:CheckState>
+									<xr:Value xsi:type="FormChoiceListDesTimeValue">
+										<Presentation>
+											<v8:item>
+												<v8:lang>ru</v8:lang>
+												<v8:content>Основной</v8:content>
+											</v8:item>
+											<v8:item>
+												<v8:lang>en</v8:lang>
+												<v8:content>Regular</v8:content>
+											</v8:item>
+										</Presentation>
+										<Value xsi:type="xs:string">Основной</Value>
+									</xr:Value>
+								</xr:Item>
+								<xr:Item>
+									<xr:Presentation/>
+									<xr:CheckState>0</xr:CheckState>
+									<xr:Value xsi:type="FormChoiceListDesTimeValue">
+										<Presentation>
+											<v8:item>
+												<v8:lang>ru</v8:lang>
+												<v8:content>Добавление в пакет</v8:content>
+											</v8:item>
+											<v8:item>
+												<v8:lang>en</v8:lang>
+												<v8:content>Add to package</v8:content>
+											</v8:item>
+										</Presentation>
+										<Value xsi:type="xs:string">ДобавлениеВПакет</Value>
+									</xr:Value>
+								</xr:Item>
+							</ChoiceList>
+							<ContextMenu name="РежимРасшифровкиКонтекстноеМеню" id="401"/>
+							<ExtendedTooltip name="РежимРасшифровкиРасширеннаяПодсказка" id="402"/>
+						</RadioButtonField>
 						<SpreadSheetDocumentField name="Визуализация" id="13">
 							<DataPath>Объект.Визуализация</DataPath>
 							<TitleLocation>None</TitleLocation>
@@ -1163,17 +1206,122 @@
 								</Button>
 							</ChildItems>
 						</UsualGroup>
-						<InputField name="ТекстПакета" id="388">
-							<DataPath>ТекстПакета</DataPath>
-							<ReadOnly>true</ReadOnly>
-							<TitleLocation>None</TitleLocation>
-							<AutoMaxWidth>false</AutoMaxWidth>
-							<AutoMaxHeight>false</AutoMaxHeight>
-							<MultiLine>true</MultiLine>
-							<Font ref="sys:DefaultGUIFont" faceName="Courier New" kind="WindowsFont"/>
-							<ContextMenu name="ТекстПакетаКонтекстноеМеню" id="389"/>
-							<ExtendedTooltip name="ТекстПакетаРасширеннаяПодсказка" id="390"/>
-						</InputField>
+						<RadioButtonField name="ФорматПакета" id="403">
+							<DataPath>Объект.ФорматПакета</DataPath>
+							<TitleLocation>Left</TitleLocation>
+							<RadioButtonType>Tumbler</RadioButtonType>
+							<ChoiceList>
+								<xr:Item>
+									<xr:Presentation/>
+									<xr:CheckState>0</xr:CheckState>
+									<xr:Value xsi:type="FormChoiceListDesTimeValue">
+										<Presentation>
+											<v8:item>
+												<v8:lang>ru</v8:lang>
+												<v8:content>XML</v8:content>
+											</v8:item>
+											<v8:item>
+												<v8:lang>en</v8:lang>
+												<v8:content>XML</v8:content>
+											</v8:item>
+										</Presentation>
+										<Value xsi:type="xs:string">XML</Value>
+									</xr:Value>
+								</xr:Item>
+								<xr:Item>
+									<xr:Presentation/>
+									<xr:CheckState>0</xr:CheckState>
+									<xr:Value xsi:type="FormChoiceListDesTimeValue">
+										<Presentation>
+											<v8:item>
+												<v8:lang>ru</v8:lang>
+												<v8:content>JSON</v8:content>
+											</v8:item>
+											<v8:item>
+												<v8:lang>en</v8:lang>
+												<v8:content>JSON</v8:content>
+											</v8:item>
+										</Presentation>
+										<Value xsi:type="xs:string">JSON</Value>
+									</xr:Value>
+								</xr:Item>
+							</ChoiceList>
+							<ContextMenu name="ФорматПакетаКонтекстноеМеню" id="404"/>
+							<ExtendedTooltip name="ФорматПакетаРасширеннаяПодсказка" id="405"/>
+						</RadioButtonField>
+						<UsualGroup name="ГруппаСодержимоеПакета" id="406">
+							<Group>AlwaysHorizontal</Group>
+							<Representation>None</Representation>
+							<ShowTitle>false</ShowTitle>
+							<ExtendedTooltip name="ГруппаСодержимоеПакетаРасширеннаяПодсказка" id="407"/>
+							<ChildItems>
+								<Table name="ОбъектыПакета" id="408">
+									<Representation>List</Representation>
+									<TitleLocation>Top</TitleLocation>
+									<Width>50</Width>
+									<HorizontalStretch>false</HorizontalStretch>
+									<DataPath>Объект.ОбъектыПакета</DataPath>
+									<RowFilter xsi:nil="true"/>
+									<ContextMenu name="ОбъектыПакетаКонтекстноеМеню" id="409"/>
+									<AutoCommandBar name="ОбъектыПакетаКоманднаяПанель" id="410">
+										<Autofill>false</Autofill>
+										<ChildItems>
+											<Button name="ОбъектыПакетаУдалить" id="411">
+												<Type>CommandBarButton</Type>
+												<CommandName>Form.Item.ОбъектыПакета.StandardCommand.Delete</CommandName>
+												<LocationInCommandBar>InCommandBar</LocationInCommandBar>
+												<ExtendedTooltip name="ОбъектыПакетаУдалитьРасширеннаяПодсказка" id="412"/>
+											</Button>
+										</ChildItems>
+									</AutoCommandBar>
+									<ExtendedTooltip name="ОбъектыПакетаРасширеннаяПодсказка" id="413"/>
+									<SearchStringAddition name="ОбъектыПакетаСтрокаПоиска" id="414">
+										<AdditionSource>
+											<Item>ОбъектыПакета</Item>
+											<Type>SearchStringRepresentation</Type>
+										</AdditionSource>
+										<ContextMenu name="ОбъектыПакетаСтрокаПоискаКонтекстноеМеню" id="415"/>
+										<ExtendedTooltip name="ОбъектыПакетаСтрокаПоискаРасширеннаяПодсказка" id="416"/>
+									</SearchStringAddition>
+									<ViewStatusAddition name="ОбъектыПакетаСостояниеПросмотра" id="417">
+										<AdditionSource>
+											<Item>ОбъектыПакета</Item>
+											<Type>ViewStatusRepresentation</Type>
+										</AdditionSource>
+										<ContextMenu name="ОбъектыПакетаСостояниеПросмотраКонтекстноеМеню" id="418"/>
+										<ExtendedTooltip name="ОбъектыПакетаСостояниеПросмотраРасширеннаяПодсказка" id="419"/>
+									</ViewStatusAddition>
+									<SearchControlAddition name="ОбъектыПакетаУправлениеПоиском" id="420">
+										<AdditionSource>
+											<Item>ОбъектыПакета</Item>
+											<Type>SearchControl</Type>
+										</AdditionSource>
+										<ContextMenu name="ОбъектыПакетаУправлениеПоискомКонтекстноеМеню" id="421"/>
+										<ExtendedTooltip name="ОбъектыПакетаУправлениеПоискомРасширеннаяПодсказка" id="422"/>
+									</SearchControlAddition>
+									<ChildItems>
+										<InputField name="ОбъектыПакетаСсылка" id="423">
+											<DataPath>Объект.ОбъектыПакета.Ссылка</DataPath>
+											<ReadOnly>true</ReadOnly>
+											<EditMode>EnterOnInput</EditMode>
+											<ContextMenu name="ОбъектыПакетаСсылкаКонтекстноеМеню" id="424"/>
+											<ExtendedTooltip name="ОбъектыПакетаСсылкаРасширеннаяПодсказка" id="425"/>
+										</InputField>
+									</ChildItems>
+								</Table>
+								<InputField name="ТекстПакета" id="388">
+									<DataPath>ТекстПакета</DataPath>
+									<ReadOnly>true</ReadOnly>
+									<TitleLocation>None</TitleLocation>
+									<AutoMaxWidth>false</AutoMaxWidth>
+									<AutoMaxHeight>false</AutoMaxHeight>
+									<MultiLine>true</MultiLine>
+									<Font ref="sys:DefaultGUIFont" faceName="Courier New" kind="WindowsFont"/>
+									<ContextMenu name="ТекстПакетаКонтекстноеМеню" id="389"/>
+									<ExtendedTooltip name="ТекстПакетаРасширеннаяПодсказка" id="390"/>
+								</InputField>
+							</ChildItems>
+						</UsualGroup>
 					</ChildItems>
 				</Page>
 			</ChildItems>
@@ -1344,11 +1492,11 @@
 			<ToolTip>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Собрать уникальные ссылки из ссылочных полей выборки и упаковать объекты в XML</v8:content>
+					<v8:content>Упаковать объекты из таблицы «Объекты пакета», а если она пуста — по ссылкам отчета на доске, в выбранном формате</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Collect unique references from the selection reference fields and pack the objects to XML</v8:content>
+					<v8:content>Pack the objects from the Package objects table or, if it is empty, by the references of the board report, in the selected format</v8:content>
 				</v8:item>
 			</ToolTip>
 			<Action>Упаковать</Action>
