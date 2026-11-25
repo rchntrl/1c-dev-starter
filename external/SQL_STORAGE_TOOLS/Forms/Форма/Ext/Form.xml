@@ -1218,6 +1218,23 @@
 										<Presentation>
 											<v8:item>
 												<v8:lang>ru</v8:lang>
+												<v8:content>Хранилище значения</v8:content>
+											</v8:item>
+											<v8:item>
+												<v8:lang>en</v8:lang>
+												<v8:content>Value storage</v8:content>
+											</v8:item>
+										</Presentation>
+										<Value xsi:type="xs:string">ХранилищеЗначения</Value>
+									</xr:Value>
+								</xr:Item>
+								<xr:Item>
+									<xr:Presentation/>
+									<xr:CheckState>0</xr:CheckState>
+									<xr:Value xsi:type="FormChoiceListDesTimeValue">
+										<Presentation>
+											<v8:item>
+												<v8:lang>ru</v8:lang>
 												<v8:content>XML</v8:content>
 											</v8:item>
 											<v8:item>
@@ -1266,6 +1283,12 @@
 									<AutoCommandBar name="ОбъектыПакетаКоманднаяПанель" id="410">
 										<Autofill>false</Autofill>
 										<ChildItems>
+											<Button name="ОбъектыПакетаЗаполнить" id="426">
+												<Type>CommandBarButton</Type>
+												<CommandName>Form.Command.ЗаполнитьОбъектыПакета</CommandName>
+												<LocationInCommandBar>InCommandBar</LocationInCommandBar>
+												<ExtendedTooltip name="ОбъектыПакетаЗаполнитьРасширеннаяПодсказка" id="427"/>
+											</Button>
 											<Button name="ОбъектыПакетаУдалить" id="411">
 												<Type>CommandBarButton</Type>
 												<CommandName>Form.Item.ОбъектыПакета.StandardCommand.Delete</CommandName>
@@ -1311,7 +1334,6 @@
 								</Table>
 								<InputField name="ТекстПакета" id="388">
 									<DataPath>ТекстПакета</DataPath>
-									<ReadOnly>true</ReadOnly>
 									<TitleLocation>None</TitleLocation>
 									<AutoMaxWidth>false</AutoMaxWidth>
 									<AutoMaxHeight>false</AutoMaxHeight>
@@ -1600,6 +1622,29 @@
 				</v8:item>
 			</ToolTip>
 			<Action>УдалитьПакет</Action>
+		</Command>
+		<Command name="ЗаполнитьОбъектыПакета" id="17">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Заполнить из текста</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Fill from text</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Очистить таблицу и заполнить ее объектами пакета из текстового поля</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Clear the table and fill it with the objects of the package in the text field</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>ЗаполнитьОбъектыПакета</Action>
 		</Command>
 	</Commands>
 </Form>

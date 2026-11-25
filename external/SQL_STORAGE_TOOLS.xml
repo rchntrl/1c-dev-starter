@@ -658,11 +658,11 @@
 					<ToolTip>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content>Формат текста пакета при упаковке: XML (ХранилищеЗначения) или JSON (сериализованные объекты)</v8:content>
+							<v8:content>Формат текста пакета при упаковке: хранилище значения (ХранилищеЗначения в XML), XML или JSON (сериализованные объекты)</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Package text format for packing: XML (ValueStorage) or JSON (serialized objects)</v8:content>
+							<v8:content>Package text format for packing: value storage (ValueStorage in XML), XML or JSON (serialized objects)</v8:content>
 						</v8:item>
 					</ToolTip>
 					<MarkNegatives>false</MarkNegatives>
